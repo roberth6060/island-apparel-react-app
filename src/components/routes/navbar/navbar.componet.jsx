@@ -34,34 +34,34 @@ const Navbar = () => (
             <ul className="dropdown">
               <li>
                 <Link className="nav-link" to="/shop">
-                  Dropdown 1
+                  All
                 </Link>
               </li>
               <li>
                 <Link className="nav-link" to="/shop">
-                  Dropdown 2
+                  Women
                 </Link>
               </li>
               <li>
                 <Link className="nav-link" to="/shop">
-                  Dropdown 3
+                  Men
                 </Link>
               </li>
             </ul>
           </li>
 
           <li>
-            <Link className="nav-link" to="/shop">
+            <Link className="nav-link" to="/contact">
               Contact
             </Link>
           </li>
           <li>
-            <Link className="nav-link" to="/">
+            <Link className="nav-link" to="/sign-in">
               Sign In
             </Link>
           </li>
           <li>
-            <Link className="nav-link" to="/shirt">
+            <Link className="nav-link" to="/cart">
               🛒
             </Link>
           </li>

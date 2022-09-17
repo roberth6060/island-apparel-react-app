@@ -1,3 +1,8 @@
 @use "./components/routes/navbar/navbar.component.scss";
 @use "./components/categories-component/categories.styles.scss";
 @use "./components/category-item/category-item-component.scss";
+@use "./components/routes/sign-in/sign-in.component.scss";
+
+body {
+  margin: 0;
+}
