@@ -41,7 +41,10 @@ provider.setCustomParameters({
 //same authenication service will be used for this application:
 export const auth = getAuth();
 
+/* === Sign in with Google Redirect and Pop up option ===*/
 export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
+export const signInWithGoogleRedirect = () =>
+  signInWithRedirect(auth, provider);
 
 //Use this to access database:
 export const db = getFirestore();
