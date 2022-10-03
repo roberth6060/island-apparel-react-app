@@ -10,21 +10,22 @@ import {
   signInWithGoogleRedirect,
   createUSerDocumentFromAuth,
 } from "../../utils/firebase/firebase.utils";
-import { async } from "@firebase/util";
+
+import SignUpForm from "../../sign-up-form/signup-form.component";
 
 const Signin = () => {
   //Empty array means run this function once when Signin component mounts:
   /**
   tell React that your component needs to do something after render. React will remember the function you passed (we'll refer to it as our “effect”), and call it later after performing the DOM updates. */
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await getRedirectResult(auth);
-      if (response) {
-        const userDocRef = await createUSerDocumentFromAuth(response.user);
-      }
-    };
-    fetchData().catch(console.error);
-  }, []);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const response = await getRedirectResult(auth);
+  //     if (response) {
+  //       const userDocRef = await createUSerDocumentFromAuth(response.user);
+  //     }
+  //   };
+  //   fetchData().catch(console.error);
+  // }, []);
 
   const logGoogleUser = async () => {
     const { user } = await signInWithGooglePopup();
@@ -33,11 +34,13 @@ const Signin = () => {
 
   return (
     <div>
-      <h1>Signin</h1>
+      <h1>Sign in Page</h1>
       <button onClick={logGoogleUser}>Sign in with google popup</button>
-      <button onClick={signInWithGoogleRedirect}>
+      {/* <button onClick={signInWithGoogleRedirect}>
         Sign in with google redirect
-      </button>
+      </button> */}
+
+      <SignUpForm />
     </div>
   );
 };

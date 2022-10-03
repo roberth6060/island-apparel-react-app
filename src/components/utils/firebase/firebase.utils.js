@@ -11,6 +11,7 @@ import {
   signInWithRedirect,
   signInWithPopup,
   GoogleAuthProvider,
+  createUserWithEmailAndPassword,
 } from "firebase/auth";
 
 //firebase store imports:
@@ -49,7 +50,11 @@ export const signInWithGoogleRedirect = () =>
 //Use this to access database:
 export const db = getFirestore();
 //aysnc function that receives some users authenication object and stores it inside firestore:
-export const createUSerDocumentFromAuth = async (userAuth) => {
+export const createUSerDocumentFromAuth = async (
+  userAuth,
+  additionalInformation = {}
+) => {
+  if (!userAuth) return;
   //See if there is an existing document reference (instance of a document model):
   const userDocRef = doc(db, "users", userAuth.uid); //Even if it does not exist, Google will still generate this object.
 
@@ -71,6 +76,7 @@ export const createUSerDocumentFromAuth = async (userAuth) => {
         displayName,
         email,
         createAt,
+        ...additionalInformation,
       });
     } catch (err) {
       console.log("Error creating the user", err.message);
@@ -78,4 +84,9 @@ export const createUSerDocumentFromAuth = async (userAuth) => {
   }
   //if user data exist
   return userDocRef;
+};
+
+export const createAuthUserWithEmailAndPassword = async (email, password) => {
+  if (!email || !password) return;
+  return await createUserWithEmailAndPassword(auth, email, password);
 };

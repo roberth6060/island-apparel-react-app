@@ -2,6 +2,9 @@
 @use "./components/categories-component/categories.styles.scss";
 @use "./components/category-item/category-item-component.scss";
 @use "./components/routes/sign-in/sign-in.component.scss";
+@use "./components/form-input/form-input.component.scss";
+@use "./components/sign-up-form/signup-form.styles.scss";
+@use "./components/button/button.styles.scss";
 
 body {
   margin: 0;
