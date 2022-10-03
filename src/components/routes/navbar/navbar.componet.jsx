@@ -56,7 +56,7 @@ const Navbar = () => (
             </Link>
           </li>
           <li>
-            <Link className="nav-link" to="/sign-in">
+            <Link className="nav-link" to="/auth">
               Sign In
             </Link>
           </li>
