@@ -13,6 +13,7 @@ import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
 
 //firebase store imports:
@@ -87,7 +88,7 @@ export const createUSerDocumentFromAuth = async (
   return userDocRef;
 };
 
-/********************** Create interface layer through helper function **********************/
+/********************** Create interface layer (function) through helper function **********************/
 //Sign up
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
@@ -98,3 +99,6 @@ export const signInAuthUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
   return await signInWithEmailAndPassword(auth, email, password);
 };
+
+//Sign out NOTE auth also keeps track of what users are signin
+export const signOutUser = async () => await signOut(auth);

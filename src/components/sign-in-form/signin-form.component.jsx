@@ -11,6 +11,7 @@ import {
 
 import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
+import { UserContext } from "../../context/user.context";
 
 const defaultFormField = {
   email: "",
@@ -21,6 +22,9 @@ const SignInForm = () => {
   const [formFields, setFormFields] = useState(defaultFormField);
 
   const { email, password } = formFields;
+
+  //use useContext to store user data:
+  const { setCurrentUser } = useContext(UserContext);
 
   //Reset the values in formFields:
   const resetFormFields = () => {
@@ -46,8 +50,9 @@ const SignInForm = () => {
         email,
         password
       );
+      //Update the currentUser state with user's info:
+      setCurrentUser(user);
 
-      console.log(user.email);
       resetFormFields();
     } catch (err) {
       switch (err.code) {
