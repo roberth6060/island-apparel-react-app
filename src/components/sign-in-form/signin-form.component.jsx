@@ -2,7 +2,7 @@
  * useState() Hook allows us to track state in a function component. State generally refers to data or properties that need to be tracking in an application
  */
 
-import { useState } from "react";
+import { useState, useContext } from "react";
 import {
   signInWithGooglePopup,
   createUSerDocumentFromAuth,
@@ -31,7 +31,10 @@ const SignInForm = () => {
   // Sign in using Google services:
   const SignInWithGoogle = async () => {
     const { user } = await signInWithGooglePopup();
+
     await createUSerDocumentFromAuth(user);
+
+    console.log(user.email);
   };
 
   const handleSubmit = async (event) => {
@@ -39,12 +42,12 @@ const SignInForm = () => {
 
     //See if user is authenicated with email and password:
     try {
-      const response = await signInAuthUserWithEmailAndPassword(
+      const { user } = await signInAuthUserWithEmailAndPassword(
         email,
         password
       );
 
-      console.log(response);
+      console.log(user.email);
       resetFormFields();
     } catch (err) {
       switch (err.code) {
