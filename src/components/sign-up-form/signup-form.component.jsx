@@ -2,7 +2,7 @@
  * useState() Hook allows us to track state in a function component. State generally refers to data or properties that need to be tracking in an application
  */
 
-import { useState, useContext } from "react";
+import { useState } from "react"; //useContext
 import {
   createAuthUserWithEmailAndPassword,
   createUSerDocumentFromAuth,
@@ -10,7 +10,7 @@ import {
 
 import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
-import { UserContext } from "../../context/user.context";
+// import { UserContext } from "../../context/user.context";
 
 const defaultFormField = {
   displayName: "",
@@ -25,7 +25,7 @@ const SignUpForm = () => {
   const { displayName, email, password, confirmPassword } = formFields;
 
   //Set user after sign up:
-  const { setCurrentUser } = useContext(UserContext);
+  // const { setCurrentUser } = useContext(UserContext);
 
   //Reset the values in formFields:
   const resetFormFields = () => {
@@ -49,7 +49,7 @@ const SignUpForm = () => {
         password
       );
 
-      setCurrentUser(user);
+      // setCurrentUser(user);
 
       await createUSerDocumentFromAuth(user, { displayName });
 

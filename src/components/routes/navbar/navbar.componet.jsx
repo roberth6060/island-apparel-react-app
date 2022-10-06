@@ -6,15 +6,15 @@ import { signOutUser } from "../../utils/firebase/firebase.utils";
 
 const Navbar = () => {
   //Whenever value inside context is updated, DOM rerenders
-  const { currentUser, setCurrentUser } = useContext(UserContext);
+  const { currentUser } = useContext(UserContext);
 
   //Sign out handler linked to userContext
-  const signOutHandler = async () => {
-    //Sign user out of firebase
-    await signOutUser();
-    //Remove currentUser from useState
-    setCurrentUser(null);
-  };
+  // const signOutHandler = async () => {
+  //   //Sign user out of firebase
+  //   await signOutUser();
+  //   //Remove currentUser from useState
+  //   setCurrentUser(null);
+  // };
 
   return (
     <Fragment>
@@ -73,7 +73,7 @@ const Navbar = () => {
             <li>
               <Link className="nav-link" to="/auth">
                 {currentUser ? (
-                  <span className="nav-link" onClick={signOutHandler}>
+                  <span className="nav-link" onClick={signOutUser}>
                     Sign Out
                   </span>
                 ) : (

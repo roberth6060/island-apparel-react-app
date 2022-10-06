@@ -2,7 +2,7 @@
  * useState() Hook allows us to track state in a function component. State generally refers to data or properties that need to be tracking in an application
  */
 
-import { useState, useContext } from "react";
+import { useState } from "react"; //useContext
 import {
   signInWithGooglePopup,
   createUSerDocumentFromAuth,
@@ -11,7 +11,7 @@ import {
 
 import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
-import { UserContext } from "../../context/user.context";
+// import { UserContext } from "../../context/user.context";
 
 const defaultFormField = {
   email: "",
@@ -24,7 +24,7 @@ const SignInForm = () => {
   const { email, password } = formFields;
 
   //use useContext to store user data:
-  const { setCurrentUser } = useContext(UserContext);
+  // const { setCurrentUser } = useContext(UserContext);
 
   //Reset the values in formFields:
   const resetFormFields = () => {
@@ -34,11 +34,8 @@ const SignInForm = () => {
 
   // Sign in using Google services:
   const SignInWithGoogle = async () => {
-    const { user } = await signInWithGooglePopup();
-
-    await createUSerDocumentFromAuth(user);
-
-    console.log(user.email);
+    await signInWithGooglePopup();
+    // setCurrentUser(user);
   };
 
   const handleSubmit = async (event) => {
@@ -51,7 +48,7 @@ const SignInForm = () => {
         password
       );
       //Update the currentUser state with user's info:
-      setCurrentUser(user);
+      // setCurrentUser(user);
 
       resetFormFields();
     } catch (err) {
