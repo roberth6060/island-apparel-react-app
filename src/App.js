@@ -5,10 +5,7 @@ import Contact from "./components/routes/contact/contact.component";
 import Cart from "./components/routes/cart/cart.component";
 import "./index.scss";
 import { Routes, Route } from "react-router-dom";
-
-const Shop = () => {
-  return <h1> I am now shopping on this page</h1>;
-};
+import Shop from "./components/routes/shop/shop.component.jsx";
 
 //index = base component or index ={true}
 const App = () => {
