@@ -6,6 +6,5 @@
 @use "./components/button/button.styles.scss";
 @use "./components/sign-in-form/signin-form.styles.scss";
 @use "./components/routes/authentication/authentication.styles.scss";
-body {
-  margin: 0;
-}
+@use "./components/product-card/product-card.styles.scss";
+@use "./components/routes/shop/shop.component.scss";
