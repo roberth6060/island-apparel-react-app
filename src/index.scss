@@ -8,3 +8,15 @@
 @use "./components/routes/authentication/authentication.styles.scss";
 @use "./components/product-card/product-card.styles.scss";
 @use "./components/routes/shop/shop.component.scss";
+@use "./components/cart-icon/cart-icon.component.scss";
+@use "./components/cart-dropdown/cart-dropdown.component.scss";
+//Global style sheet
+body {
+  margin: 0;
+  padding: 10px 40px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}

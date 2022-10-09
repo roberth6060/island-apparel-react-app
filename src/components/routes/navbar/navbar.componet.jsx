@@ -2,19 +2,17 @@
 import { Fragment, useContext } from "react";
 import { Outlet, Link } from "react-router-dom";
 import { UserContext } from "../../../context/user.context";
+import { CartContext } from "../../../context/cart.context";
 import { signOutUser } from "../../utils/firebase/firebase.utils";
+import CartIcon from "../../cart-icon/cart-icon.component";
+import CartDropDown from "../../cart-dropdown/cart-dropdown.component";
 
 const Navbar = () => {
   //Whenever value inside context is updated, DOM rerenders
   const { currentUser } = useContext(UserContext);
 
-  //Sign out handler linked to userContext
-  // const signOutHandler = async () => {
-  //   //Sign user out of firebase
-  //   await signOutUser();
-  //   //Remove currentUser from useState
-  //   setCurrentUser(null);
-  // };
+  //Conditionally render cart drop based on  isCartOpen
+  const { isCartOpen } = useContext(CartContext);
 
   return (
     <Fragment>
@@ -29,7 +27,6 @@ const Navbar = () => {
             </h1>
           </Link>
         </div>
-
         <ul className="nav-links">
           <input type="checkbox" id="checkbox_toggle" />
           <label htmlFor="checkbox_toggle" className="hamburger">
@@ -82,12 +79,14 @@ const Navbar = () => {
               </Link>
             </li>
             <li>
-              <Link className="nav-link" to="/cart">
-                🛒
-              </Link>
+              <CartIcon />
             </li>
           </div>
         </ul>
+        {
+          //Short-circuit operator (components are truthy values bs it is a function)
+          isCartOpen && <CartDropDown />
+        }
       </nav>
       <Outlet />
     </Fragment>
