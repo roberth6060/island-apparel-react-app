@@ -1,13 +1,12 @@
-import Navbar from "./components/routes/navbar/navbar.componet";
-import Home from "./components/routes/homepage/home.component";
-import Authentication from "./components/routes/authentication/authentication.component";
-import Contact from "./components/routes/contact/contact.component";
-import Cart from "./components/routes/cart/cart.component";
+import Navbar from "./routes/Navbar";
+import Home from "./routes/Home";
+import Authentication from "./routes/Authentication";
+import Contact from "./routes/Contact";
+import Cart from "./routes/Cart";
+import Shop from "./routes/Shop.jsx";
 import "./index.scss";
 import { Routes, Route } from "react-router-dom";
-import Shop from "./components/routes/shop/shop.component.jsx";
 
-//index = base component or index ={true}
 const App = () => {
   //Homepage Layout:
   return (
