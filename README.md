@@ -13,7 +13,7 @@ Island Apparel is a Jamaican-inspired online retail store selling custom hats, s
 - run with yarn start or npm
 
 ```bash
-$ git clone https://github.com/RandolphG/MovieConntection.git
+$ git clone https://github.com/roberth6060/island-apparel-react-app.git
 $ cd project folder
 $ yarn or npm i
 $ yarn start or npm start
