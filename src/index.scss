@@ -1,7 +1,13 @@
 //Global style sheet
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 body {
   margin: 0;
-  padding: 10px 40px;
+  padding: 20px 40px;
 }
 
 a {
