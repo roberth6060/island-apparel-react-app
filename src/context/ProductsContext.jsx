@@ -1,5 +1,6 @@
 import { createContext, useState } from "react";
-import PRODUCTS from "../data/shop/hatsItems.json";
+
+import SHOP_DATA from "../data/shop/productsData";
 
 //Context Value
 export const ProductsContext = createContext({
@@ -8,8 +9,11 @@ export const ProductsContext = createContext({
 
 //Context Provider
 export const ProductsProvider = ({ children }) => {
+  const text = SHOP_DATA[1].items;
+
+  console.log(text);
   //Track current state:
-  const [products] = useState(PRODUCTS);
+  const [products] = useState(text);
 
   //Use to provide current state value to child of ProductContext.Provider
   const value = { products };
