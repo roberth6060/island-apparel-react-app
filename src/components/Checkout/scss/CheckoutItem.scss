@@ -23,9 +23,11 @@
 
   .quantity {
     display: flex;
+    align-items: center;
 
     .arrow {
       cursor: pointer;
+      font-size: 15px;
     }
     .value {
       margin: 0 10px;

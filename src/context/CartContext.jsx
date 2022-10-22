@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect } from "react";
 
-/************* MUST CREATE NEW CARTSITEM OBJECT FOR REACT TO RERENDER  **************/
+/************* NOTE MUST CREATE NEW CARTSITEM OBJECT FOR REACT TO RERENDER  **************/
 //Helper function:
 const addCartItem = (cartItems, productToAdd) => {
   //Find if cartItems contains productToAdd (EXISTING PRODUCT):
@@ -39,14 +39,20 @@ const removeItemFromCart = (cartItems, productToRemove) => {
   });
 };
 
+const clearCartItem = (cartItems, cartItemToClear) => {
+  //Remove cartItemToClear from cartitems (no matter the quantity)
+  return cartItems.filter((cartItem) => cartItem.id !== cartItemToClear.id);
+};
+
 //CartContext
 export const CartContext = createContext({
   isCartOpen: false,
   setIsCartOpen: () => {},
   cartItems: [],
   addItemToCart: () => {},
-  removeItemToCarts: () => {},
+  removeItemToCart: () => {},
   cartCount: 0,
+  clearItemFromCart: () => {},
 });
 
 export const CartProvider = ({ children }) => {
@@ -71,6 +77,11 @@ export const CartProvider = ({ children }) => {
   const removeItemToCart = (productToRemove) => {
     setCartItems(removeItemFromCart(cartItems, productToRemove));
   };
+  //Clear Items from cart
+  const clearItemFromCart = (productToRemove) => {
+    setCartItems(clearCartItem(cartItems, productToRemove));
+  };
+
   const value = {
     isCartOpen,
     setIsCartOpen,
@@ -78,6 +89,7 @@ export const CartProvider = ({ children }) => {
     removeItemToCart,
     cartItems,
     cartCount,
+    clearItemFromCart,
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
