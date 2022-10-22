@@ -25,6 +25,8 @@ import {
   setDoc,
   collection,
   writeBatch,
+  query,
+  getDocs,
 } from "firebase/firestore";
 
 // Your web app's Firebase configuration
@@ -70,7 +72,22 @@ export const addCollectionAndDocument = async (collectionKey, objectsToAdd) => {
     batch.set(docRef, object);
   });
   await batch.commit();
-  console.log("done");
+  // console.log("done");
+};
+
+//Gain access to collection firebase database
+export const getCategoriesAndDocuments = async () => {
+  const collectionRef = collection(db, "categories");
+  const q = query(collectionRef);
+  const querySnapshot = await getDocs(q);
+  //gives array of individual docs and the snapshots are the actual data
+  const categoryMap = querySnapshot.docs.reduce((acc, docSnapShot) => {
+    const { title, items } = docSnapShot.data();
+    acc[title.toLowerCase()] = items;
+    return acc;
+  }, {});
+
+  return categoryMap;
 };
 
 //aysnc function that receives some users authenication object and stores it inside firestore:
