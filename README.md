@@ -4,7 +4,8 @@ Island Apparel is a Jamaican-inspired online retail store selling custom hats, s
 
 ## Built With
 
-* HTML, CSS/SCSS, JavaScript, React.js, and Google firebase (authentication and database service)
+<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original-wordmark.svg" alt="html5" width="40" height="40"/>
+, CSS/SCSS, JavaScript, React.js, and Google firebase (authentication and database service)
 
 ### *Installation process* :
 - clone repo
