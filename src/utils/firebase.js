@@ -18,14 +18,18 @@ import {
 } from "firebase/auth";
 
 //firebase store imports:
-import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
-
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  collection,
+  writeBatch,
+} from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCsqkkjmxJebT_-QuFYJEJG4n6B-UOhDy8",
+  apiKey: process.env.REACT_APP_API_KEY,
   authDomain: "island-apparel-8d047.firebaseapp.com",
   projectId: "island-apparel-8d047",
   storageBucket: "island-apparel-8d047.appspot.com",
@@ -52,6 +56,23 @@ export const signInWithGoogleRedirect = () =>
 
 //Use this to access database:
 export const db = getFirestore();
+
+/******** Create new database collection in firestore with productsData  ********/
+export const addCollectionAndDocument = async (collectionKey, objectsToAdd) => {
+  const collectionRef = collection(db, collectionKey);
+  //Creates batch to add objects to collection (instantiate batch class):
+  const batch = writeBatch(db);
+  //iterated over each individual object in array
+  objectsToAdd.forEach((object) => {
+    //Tells doc method which database is being using
+    const docRef = doc(collectionRef, object.title.toLowerCase()); //firebase will give back document reference even if it doesnt exist
+
+    batch.set(docRef, object);
+  });
+  await batch.commit();
+  console.log("done");
+};
+
 //aysnc function that receives some users authenication object and stores it inside firestore:
 export const createUSerDocumentFromAuth = async (
   userAuth,
@@ -63,9 +84,6 @@ export const createUSerDocumentFromAuth = async (
 
   //get data related to a document
   const userSnapshot = await getDoc(userDocRef);
-
-  //check if document exist
-  // console.log(userSnapshot.exists());
 
   //if user data does not exist, Will retunr true if it does not exist
   if (!userSnapshot.exists()) {
