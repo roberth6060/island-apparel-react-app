@@ -17,8 +17,6 @@ export const CategoriesProvider = ({ children }) => {
   //Track current state:
   const [categoriesMap, setCategoriesMap] = useState({});
 
-  console.log(categoriesMap);
-
   useEffect(() => {
     //Proper way to use async functions woth useEffect
     const getCategoriesMap = async () => {

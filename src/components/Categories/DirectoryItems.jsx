@@ -1,7 +1,7 @@
-import "./scss/CategoryItems.scss";
+import "./scss/DirectoryItems.scss";
 
 const CategoryItems = ({ category }) => (
-  <div key={category.id} className="category-container">
+  <div key={category.id} className="directory-container">
     <div
       className="background-image"
       style={{

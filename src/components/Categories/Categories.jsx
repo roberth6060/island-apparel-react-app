@@ -1,5 +1,5 @@
 import React from "react";
-import CategoryItems from "./CategoryItems";
+import CategoryItems from "./DirectoryItems";
 import homeItems from "../../data/home/homeItems";
 import "./scss/Categories.scss";
 
