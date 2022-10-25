@@ -1,6 +1,3 @@
-//Tells reactDOM where to render nested matching element:
-// import { Outlet } from "react-router-dom";
-//Outlet allows us to change portion of the code based on the routes and nested routes.
 import Categories from "../components/Categories/Categories";
 
 const Home = () => {
