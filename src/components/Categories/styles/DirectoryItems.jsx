@@ -11,7 +11,6 @@ export const DirectoryContainer = styled.div`
   overflow: hidden;
   height: 280px;
   &:hover {
-    // background-color: yellow;
     cursor: pointer;
   }
 `;
