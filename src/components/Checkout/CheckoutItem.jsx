@@ -4,7 +4,7 @@ import {
   faLessThan,
   faGreaterThan,
 } from "@fortawesome/free-solid-svg-icons";
-import "./scss/CheckoutItem.scss";
+// import "./scss/CheckoutItem.scss";
 import { useContext } from "react";
 import { CartContext } from "../../context/CartContext";
 
