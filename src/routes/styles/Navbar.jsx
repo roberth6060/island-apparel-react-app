@@ -18,7 +18,6 @@ export const NavbarContainer = styled.div`
   input[type="checkbox"] {
     display: none;
   }
-  /* ====== HAMBURGER MENU ====== */
   .hamburger {
     display: none;
     font-size: 24px;

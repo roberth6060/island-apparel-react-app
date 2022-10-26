@@ -1,4 +1,4 @@
-import "./styles/Contact.scss";
+// import "./styles/Contact.scss";
 const Contact = () => (
   <div>
     <h1>Contact</h1>

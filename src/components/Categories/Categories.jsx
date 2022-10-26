@@ -1,14 +1,14 @@
 import React from "react";
 import CategoryItems from "./DirectoryItems";
 import homeItems from "../../data/home/homeItems";
-import "./scss/Categories.scss";
+import { CategoriesContainer } from "./styles/Categories";
 
 const Categories = () => (
-  <div className="categories-container">
+  <CategoriesContainer>
     {homeItems.map((category) => (
       <CategoryItems key={category.id} category={category} />
     ))}
-  </div>
+  </CategoriesContainer>
 );
 
 export default Categories;

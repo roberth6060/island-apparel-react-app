@@ -1,4 +1,4 @@
-import "./scss/CategoryPreview.scss";
+// import "./scss/CategoryPreview.scss";
 import ProductCard from "../Product/ProductCard";
 import { Link } from "react-router-dom";
 

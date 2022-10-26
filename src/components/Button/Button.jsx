@@ -1,4 +1,4 @@
-import "./scss/Button.scss";
+import "./style/Button.scss";
 
 //Control button type:
 const BUTTON_TYPE_CLASSES = {

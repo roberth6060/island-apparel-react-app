@@ -1,19 +1,22 @@
-import "./scss/DirectoryItems.scss";
+import {
+  DirectoryContainer,
+  BackgroundImage,
+  BackgroundBody,
+} from "./styles/DirectoryItems";
 
 const CategoryItems = ({ category }) => (
-  <div key={category.id} className="directory-container">
-    <div
-      className="background-image"
+  <DirectoryContainer key={category.id}>
+    <BackgroundImage
       style={{
         //Allows use to use a string variable inside of another string:
         backgroundImage: `url(${category.imageUrl})`,
       }}
     />
-    <div className="background-body">
+    <BackgroundBody>
       <h2>{category.title}</h2>
       <p>Shop Now</p>
-    </div>
-  </div>
+    </BackgroundBody>
+  </DirectoryContainer>
 );
 
 export default CategoryItems;
