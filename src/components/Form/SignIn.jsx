@@ -2,13 +2,13 @@
  * useState() Hook allows us to track state in a function component. State generally refers to data or properties that need to be tracking in an application
  */
 
-import { useState } from "react"; //useContext
+import { useState } from "react";
 import {
   signInWithGooglePopup,
   signInAuthUserWithEmailAndPassword,
 } from "../../utils/firebase";
 import Input from "./Input";
-import Button from "../Button/Button";
+import Button, { BUTTON_TYPE_CLASSES } from "../Button/Button";
 import { SignInContainer, ButtonsContainer } from "./styles/SignIn";
 
 const defaultFormField = {
@@ -96,10 +96,12 @@ const SignIn = () => {
         />
 
         <ButtonsContainer>
-          <Button buttonType="inversed" type="submit">
-            Sign in
-          </Button>
-          <Button type="button" buttonType="google" onClick={SignInWithGoogle}>
+          <Button type="submit">Sign in</Button>
+          <Button
+            type="button"
+            buttonType={BUTTON_TYPE_CLASSES.google}
+            onClick={SignInWithGoogle}
+          >
             Google Sign In
           </Button>
         </ButtonsContainer>
