@@ -4,12 +4,23 @@ import {
   faLessThan,
   faGreaterThan,
 } from "@fortawesome/free-solid-svg-icons";
-// import "./scss/CheckoutItem.scss";
 import { useContext } from "react";
 import { CartContext } from "../../context/CartContext";
 
+import {
+  CheckoutItemContainer,
+  ImgContainer,
+  BaseSpan,
+  Quantity,
+  Arrow,
+  Value,
+  RemoveButton,
+} from "./style/CheckoutItem";
+
 const CheckoutItem = ({ cartItem }) => {
-  const { clearItemFromCart, removeItemToCart, addItemToCart } =
+  const { name, imageUrl, price, quantity } = cartItem;
+
+  const { clearItemFromCart, addItemToCart, removeItemToCart } =
     useContext(CartContext);
 
   //Handler functions
@@ -18,25 +29,21 @@ const CheckoutItem = ({ cartItem }) => {
   const rightArrowHandler = () => addItemToCart(cartItem);
 
   return (
-    <div className="checkout-item-container">
-      <div className="img-container">
-        <img width="300" alt={cartItem.name} src={cartItem.imageUrl} />
-      </div>
-      <span className="name">{cartItem.name}</span>
-      <span className="quantity">
-        <div className="arrow" onClick={leftArrowHandler}>
-          <FontAwesomeIcon icon={faLessThan} />
-        </div>
-        <span className="value"> {cartItem.quantity}</span>
-        <div className="arrow" onClick={rightArrowHandler}>
-          <FontAwesomeIcon icon={faGreaterThan} />
-        </div>
-      </span>
-      <span className="price">${cartItem.price}</span>
-      <div onClick={clearItemHandler} className="remove-btn">
+    <CheckoutItemContainer>
+      <ImgContainer>
+        <img src={imageUrl} alt={`${name}`} />
+      </ImgContainer>
+      <BaseSpan> {name} </BaseSpan>
+      <Quantity>
+        <Arrow onClick={leftArrowHandler}>&#10094;</Arrow>
+        <Value>{quantity}</Value>
+        <Arrow onClick={rightArrowHandler}>&#10095;</Arrow>
+      </Quantity>
+      <BaseSpan> ${price}</BaseSpan>
+      <RemoveButton onClick={clearItemHandler}>
         <FontAwesomeIcon icon={faTrash} />
-      </div>
-    </div>
+      </RemoveButton>
+    </CheckoutItemContainer>
   );
 };
 
