@@ -33,7 +33,7 @@ const Navbar = () => {
           </label>
           <NavLink to="/">Home</NavLink>
           <NavLink to="/shop">Shop</NavLink>
-          <NavLink to="/contact">Contact</NavLink>
+          {/* <NavLink to="/contact">Contact</NavLink> */}
           <NavLink to="/auth">
             {currentUser ? (
               <NavLink as="span" onClick={signOutUser}>

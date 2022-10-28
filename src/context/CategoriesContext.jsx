@@ -6,6 +6,22 @@ import {
 
 // import SHOP_DATA from "../data/shop/productsData";
 
+// SHOP_DATA.forEach((data) => {
+//   //Create women and men category that will update in firebase db
+//   if (data.title === "Shirts") {
+//     const men = data.items.filter((val) => val.gender === "Men");
+//     const women = data.items.filter((val) => val.gender === "Women");
+//     SHOP_DATA[4].items.push(...men);
+//     SHOP_DATA[3].items.push(...women);
+//   }
+//   if (data.title === "Jackets") {
+//     const men = data.items.filter((val) => val.gender === "Men");
+//     const women = data.items.filter((val) => val.gender === "Women");
+//     SHOP_DATA[4].items.push(...men);
+//     SHOP_DATA[3].items.push(...women);
+//   }
+// });
+
 //Context Value
 export const CategoriesContext = createContext({
   categoriesMap: {},
@@ -30,7 +46,7 @@ export const CategoriesProvider = ({ children }) => {
   /** NOTE the following useEffect sets new value inside firestore database */
   // useEffect(() => {
   //   addCollectionAndDocument("categories", SHOP_DATA);
-  // });
+  // }, []);
 
   //Use to provide current state value to child of ProductContext.Provider
   const value = { categoriesMap };

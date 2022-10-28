@@ -1,8 +1,8 @@
 import styled, { css } from "styled-components";
-
+//Global variables
 const subColor = "grey";
 const mainColor = "black";
-
+//css block: incapculate css inside of a blocl that can be used as variable and injected in different componenets
 const shrinkLabelStyles = css`
   top: -14px;
   font-size: 12px;

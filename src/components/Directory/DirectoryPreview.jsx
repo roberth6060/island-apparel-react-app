@@ -4,9 +4,9 @@ import {
   CategoryPreviewContainer,
   Title,
   Preview,
-} from "./styles/CategoryPreview";
+} from "./styles/DirectoryPreview";
 
-const CategoryPreview = ({ title, products }) => {
+const DirectoryPreview = ({ title, products }) => {
   return (
     <CategoryPreviewContainer>
       <h2>
@@ -23,4 +23,4 @@ const CategoryPreview = ({ title, products }) => {
   );
 };
 
-export default CategoryPreview;
+export default DirectoryPreview;

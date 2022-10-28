@@ -1,10 +1,12 @@
-import Categories from "../components/Categories/Categories";
+import { Outlet } from "react-router-dom";
+import Directory from "../components/Directory/Directory";
 
 const Home = () => {
   //Homepage Layout:
   return (
-    <div className="main-container">
-      <Categories />
+    <div>
+      <Directory />
+      <Outlet />
     </div>
   );
 };

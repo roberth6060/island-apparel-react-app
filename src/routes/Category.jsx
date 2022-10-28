@@ -7,8 +7,10 @@ import { CategoryContainer, CategoryTitle } from "./styles/Category.jsx";
 const Category = () => {
   const { categoriesMap } = useContext(CategoriesContext);
   const { category } = useParams();
+
   const [products, setProducts] = useState([]);
 
+  // console.log(products);
   useEffect(() => {
     setProducts(categoriesMap[category]);
   }, [category, categoriesMap]);
