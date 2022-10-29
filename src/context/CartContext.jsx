@@ -1,15 +1,21 @@
-import { createContext, useState, useEffect } from "react";
+import { useReducer } from "react";
+import { createContext } from "react";
+import { createAction } from "../utils/reducer";
 
-/************* NOTE MUST CREATE NEW CARTSITEM OBJECT FOR REACT TO RERENDER  **************/
-//Helper function:
+/**NOTE - CART CONTEXT TO KEEP TRACK OF ITEMS ADDED BY USER TO CART */
+
+/**
+ * addCartItem Function - used to add products to cart
+ * @param {*} cartItems keeps track of current items in cart
+ * @param {*} productToAdd potential product to be added to cartItems
+ * @returns object with cartItems with new product and quantity or existing cartItems if productToAdd exists
+ */
 const addCartItem = (cartItems, productToAdd) => {
   //Find if cartItems contains productToAdd (EXISTING PRODUCT):
   const cartItemExist = cartItems.find(
     (cartItem) => cartItem.id === productToAdd.id
   );
-
   //If cartItemExist (TRUE) found, increment quanity:
-
   if (cartItemExist) {
     return cartItems.map((cartItem) => {
       return cartItem.id === productToAdd.id
@@ -17,11 +23,16 @@ const addCartItem = (cartItems, productToAdd) => {
         : cartItem;
     });
   }
-
   //Return new array with modified cartItems (NEW PRODUCT):
   return [...cartItems, { ...productToAdd, quantity: 1 }];
 };
 
+/**
+ * removeItemFromCart Function - used to remove item from cart
+ * @param {*} cartItems keeps track of current items in cart
+ * @param {*} productToRemove potential product to be removed from cartItems
+ * @returns cartItems with decrease quantity or cartItems with removed product
+ */
 const removeItemFromCart = (cartItems, productToRemove) => {
   //Find the cart item to remove
   const cartItemExist = cartItems.find(
@@ -39,59 +50,122 @@ const removeItemFromCart = (cartItems, productToRemove) => {
   });
 };
 
+/**
+ * clearCartItem Function - clear specific item from cart
+ * @param {*} cartItems current cart with total products
+ * @param {*} cartItemToClear product that needs to be removed
+ * @return cartItems without a product from cartItemToClear
+ */
 const clearCartItem = (cartItems, cartItemToClear) => {
   //Remove cartItemToClear from cartitems (no matter the quantity)
   return cartItems.filter((cartItem) => cartItem.id !== cartItemToClear.id);
 };
 
-//CartContext
+/**
+ * CartContext Function - stores initial state of values
+ */
 export const CartContext = createContext({
-  isCartOpen: false,
   setIsCartOpen: () => {},
-  cartItems: [],
   addItemToCart: () => {},
   removeItemToCart: () => {},
-  cartCount: 0,
   clearItemFromCart: () => {},
-  cartTotal: 0,
 });
 
-export const CartProvider = ({ children }) => {
-  //Will gain access to the following data using CartContext:
-  const [isCartOpen, setIsCartOpen] = useState(false);
-  const [cartItems, setCartItems] = useState([]);
-  const [cartCount, setCartCount] = useState(0);
-  const [cartTotal, setCartTotal] = useState(0);
+/**
+ * INITIAL_STATE Object - gives object that needs to be tracked and what the reducer should return
+ */
+const INITIAL_STATE = {
+  isCartOpen: false,
+  cartItems: [],
+  cartCount: 0,
+  cartTotal: 0,
+};
 
-  //Track total counts:
-  useEffect(() => {
-    const totalQuantity = cartItems.reduce(
+export const CART_ACTION_TYPES = {
+  SET_CART_ITEMS: "SET_CART_ITEMS",
+  SET_IS_CART_OPEN: "SET_IS_CART_OPEN",
+};
+
+/**
+ *cartReducer Function - returns back an object
+ * @param {*} state tracks current state (object)
+ * @param {*} action action that will be taken
+ * @param {*} type the data type
+ * @param {*} payload stores value that lets reducer know what to update the state value with
+ * @return object that will have values depending on the type
+ */
+const cartReducer = (state, action) => {
+  const { type, payload } = action;
+
+  switch (type) {
+    case CART_ACTION_TYPES.SET_CART_ITEMS:
+      return {
+        ...state,
+        ...payload,
+      };
+    case CART_ACTION_TYPES.SET_IS_CART_OPEN:
+      return {
+        ...state,
+        isCartOpen: payload,
+      };
+    default:
+      new Error(`unhandled type of ${type} in cartReducer`);
+  }
+};
+
+/**
+ *Function - CartProvider
+ * @param children will have access to value inside useState()
+ * @return CartContext.Provider that gives the children access to value
+ */
+export const CartProvider = ({ children }) => {
+  const [{ isCartOpen, cartItems, cartCount, cartTotal }, dispatch] =
+    useReducer(cartReducer, INITIAL_STATE);
+  /**
+   * updateCartItemReducer Function - dispatch new action with payload
+   * @param newCartItems list of all current products
+   * @param newCartCount gives the total number of products in cart
+   * @param newCartTotal gives cost of product based on total quantity
+   */
+  const updateCartItemReducer = (newCartItems) => {
+    //Generate newCartTotal
+    const newCartCount = newCartItems.reduce(
       (total, cartItem) => total + cartItem.quantity,
       0
     );
-    setCartCount(totalQuantity);
-  }, [cartItems]);
 
-  //Track total cash:
-  useEffect(() => {
-    const cartTotal = cartItems.reduce(
+    //Generate newCartCount
+    const newCartTotal = newCartItems.reduce(
       (total, cartItem) => total + cartItem.quantity * cartItem.price,
       0
     );
-    setCartTotal(cartTotal);
-  }, [cartItems]);
 
-  //Add Items to cart
+    dispatch(
+      createAction(CART_ACTION_TYPES.SET_CART_ITEMS, {
+        cartItems: newCartItems,
+        cartCount: newCartCount,
+        cartTotal: newCartTotal,
+      })
+    );
+  };
+
+  /**
+   *  action Functions - to add, remove, clear item from cart or toggle cart
+   */
   const addItemToCart = (productToAdd) => {
-    setCartItems(addCartItem(cartItems, productToAdd));
+    const newCartItems = addCartItem(cartItems, productToAdd);
+    updateCartItemReducer(newCartItems);
   };
-  //Remove Items from cart
   const removeItemToCart = (productToRemove) => {
-    setCartItems(removeItemFromCart(cartItems, productToRemove));
+    const newCartItems = removeItemFromCart(cartItems, productToRemove);
+    updateCartItemReducer(newCartItems);
   };
-  //Clear Items from cart
   const clearItemFromCart = (productToRemove) => {
-    setCartItems(clearCartItem(cartItems, productToRemove));
+    const newCartItems = clearCartItem(cartItems, productToRemove);
+    updateCartItemReducer(newCartItems);
+  };
+  const setIsCartOpen = (boolean) => {
+    dispatch(createAction(CART_ACTION_TYPES.SET_IS_CART_OPEN, boolean));
   };
 
   const value = {
@@ -104,6 +178,5 @@ export const CartProvider = ({ children }) => {
     clearItemFromCart,
     cartTotal,
   };
-
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };
