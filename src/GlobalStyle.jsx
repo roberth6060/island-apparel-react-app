@@ -1,5 +1,6 @@
-//Global style sheet
+import { createGlobalStyle } from "styled-components";
 
+const GlobalStyle = createGlobalStyle`
 *,
 *::before,
 *::after {
@@ -14,3 +15,6 @@ a {
   text-decoration: none;
   color: black;
 }
+`;
+
+export default GlobalStyle;

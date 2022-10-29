@@ -19,6 +19,10 @@ export const USER_ACTION_TYPES = {
   SET_CURRENT_USER: "SET_CURRENT_USER",
 };
 
+const INITIAL_STATE = {
+  currentUser: null,
+};
+
 /**
  *userReducer Function - returns back an object
  * @param state tracks current state (object)
@@ -35,9 +39,6 @@ const userReducer = (state, action) => {
     default:
       throw new Error(`Unhandle type ${type} in userReducer`);
   }
-};
-const INITIAL_STATE = {
-  currentUser: null,
 };
 
 /**

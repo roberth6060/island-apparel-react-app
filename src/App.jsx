@@ -1,11 +1,12 @@
 import { useRoutes } from "react-router-dom";
-import Navbar from "./Navbar";
-import Home from "./Home";
-import Shop from "./Shop";
-import Contact from "./Contact";
-import Authentication from "./Authentication";
-import Checkout from "./Checkout";
 import { Suspense } from "react";
+import Navbar from "./routes/Navbar";
+import Home from "./routes/Home";
+import Shop from "./routes/Shop";
+import Contact from "./routes/Contact";
+import Authentication from "./routes/Authentication";
+import Checkout from "./routes/Checkout";
+import GlobalStyle from "./GlobalStyle";
 
 const index = [
   {
@@ -36,9 +37,14 @@ const index = [
   },
 ];
 
-const AppRouter = () => {
+const App = () => {
   const element = useRoutes(index);
-  return <Suspense fallback={<div>Nothing ready</div>}>{element}</Suspense>;
+  return (
+    <Suspense fallback={<div>Nothing ready</div>}>
+      <GlobalStyle />
+      {element}
+    </Suspense>
+  );
 };
 
-export default AppRouter;
+export default App;
