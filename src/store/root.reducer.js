@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import { userReducer } from "./user/user.reducer";
+import { userReducer } from "./user/userReducer";
 
 /**NOTE - ROOT REDUCER COMBINE ALL REDUCERS INTO ONE GLOBAL STATE  */
 

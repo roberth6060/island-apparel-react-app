@@ -14,7 +14,7 @@ import Contact from "./routes/Contact";
 import Authentication from "./routes/Authentication";
 import Checkout from "./routes/Checkout";
 import GlobalStyle from "./GlobalStyle";
-import { setCurrentUser } from "./store/user/user.action";
+import { setCurrentUser } from "./store/user/userAction";
 
 const routes = [
   {

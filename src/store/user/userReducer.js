@@ -1,4 +1,4 @@
-import USER_ACTION_TYPES from "./user.types";
+import USER_ACTION_TYPES from "./userTypes";
 
 /**NOTE - USER REDUCER THAT TRACKS USER CURRENT STATE  */
 
