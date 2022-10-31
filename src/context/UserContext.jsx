@@ -1,9 +1,11 @@
+/**NOTE - USER CONTEXT CODE  */
 import { createContext, useEffect, useReducer } from "react";
 import {
   onAuthStateChangedListener,
   createUSerDocumentFromAuth,
 } from "../utils/firebase";
 import { createAction } from "../utils/reducer";
+import USER_ACTION_TYPES from "../store/user/user.types";
 
 /**NOTE - THIS CONTEXT IS USED TO STORE USER DATA */
 
@@ -14,10 +16,6 @@ export const UserContext = createContext({
   currentUser: null,
   setCurrentUser: () => null,
 });
-
-export const USER_ACTION_TYPES = {
-  SET_CURRENT_USER: "SET_CURRENT_USER",
-};
 
 const INITIAL_STATE = {
   currentUser: null,
