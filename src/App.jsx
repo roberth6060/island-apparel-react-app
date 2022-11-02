@@ -31,17 +31,11 @@ const routes = [
       },
       {
         path: "shop/*",
-        element: <Shop />,
-        children: [
-          {
-            index: true,
-            element: <CategoriesPreview />,
-          },
-          {
-            path: ":category",
-            element: <Category />,
-          },
-        ],
+        element: <CategoriesPreview />,
+      },
+      {
+        path: "/shop/:category",
+        element: <Category />,
       },
       {
         path: "contact",
@@ -58,13 +52,6 @@ const routes = [
     ],
   },
 ];
-
-// return (
-//   <Routes>
-//     <Route index element={<CategoriesPreview />} />
-//     <Route path=":category" element={<Category />} />
-//   </Routes>
-// );
 
 const App = () => {
   /**

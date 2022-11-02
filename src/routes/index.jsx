@@ -5,4 +5,3 @@ export { Contact } from "../components/Contact";
 export { Checkout } from "../components/Checkout";
 export { CategoriesPreview } from "../components/CategoriesPreview";
 export { Category } from "../components/Category";
-export { Shop } from "../components/Shop";
