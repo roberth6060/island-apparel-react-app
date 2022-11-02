@@ -72,7 +72,6 @@ export const addCollectionAndDocument = async (collectionKey, objectsToAdd) => {
     batch.set(docRef, object);
   });
   await batch.commit();
-  // console.log("done");
 };
 
 //Gain access to collection firebase database

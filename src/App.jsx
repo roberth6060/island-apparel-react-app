@@ -1,18 +1,22 @@
 import { useRoutes } from "react-router-dom";
-import { Suspense } from "react";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 import {
   onAuthStateChangedListener,
   createUSerDocumentFromAuth,
 } from "./utils/firebase";
-import Navbar from "./routes/Navbar";
-import Home from "./routes/Home";
-import Shop from "./routes/Shop";
-import Contact from "./routes/Contact";
-import Authentication from "./routes/Authentication";
-import Checkout from "./routes/Checkout";
+import {
+  Navbar,
+  Home,
+  Contact,
+  Authentication,
+  Checkout,
+  CategoriesPreview,
+  Category,
+  Shop,
+} from "./routes";
+
 import GlobalStyle from "./GlobalStyle";
 import { setCurrentUser } from "./store/user/userAction";
 
@@ -28,6 +32,16 @@ const routes = [
       {
         path: "shop/*",
         element: <Shop />,
+        children: [
+          {
+            index: true,
+            element: <CategoriesPreview />,
+          },
+          {
+            path: ":category",
+            element: <Category />,
+          },
+        ],
       },
       {
         path: "contact",
