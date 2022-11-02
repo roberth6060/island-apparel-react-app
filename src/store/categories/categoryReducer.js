@@ -12,7 +12,7 @@ export const categoryReducer = (
   const { type, payload } = action;
   switch (type) {
     case CATEGORY_ACTION_TYPES.SET_CATEGORIES_MAP:
-      return { ...state, category: payload }; //new object that will spread through the previous state and update relevant values
+      return { ...state, categoriesMap: payload }; //new object that will spread through the previous state and update relevant values
     default:
       return state;
   }

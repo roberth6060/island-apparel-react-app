@@ -2,8 +2,8 @@ import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import "./style/Shop.jsx";
-import CategoriesPreview from "../CategoriesPreview/CategoriesPreview";
-import Category from "../Category";
+// import { CategoriesPreview } from "../CategoriesPreview";
+import { Category, CategoriesPreview } from "../../routes";
 import { setCategoriesMap } from "../../store/categories/categoryAction";
 import {
   getCategoriesAndDocuments,
@@ -47,12 +47,14 @@ const Shop = () => {
   //   addCollectionAndDocument("categories", SHOP_DATA);
   // }, []);
 
-  // return (
-  //   <Routes>
-  //     <Route index element={<CategoriesPreview />} />
-  //     <Route path=":category" element={<Category />} />
-  //   </Routes>
-  // );
+  return (
+    <Routes>
+      <Route index element={<CategoriesPreview />} />
+      <Route path=":category" element={<Category />} />
+    </Routes>
+  );
+
+  // return <h1>YO</h1>;
 };
 
 export default Shop;

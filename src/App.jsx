@@ -59,6 +59,13 @@ const routes = [
   },
 ];
 
+// return (
+//   <Routes>
+//     <Route index element={<CategoriesPreview />} />
+//     <Route path=":category" element={<Category />} />
+//   </Routes>
+// );
+
 const App = () => {
   /**
    * NOTE - only one instance of dispatch from react-redux. Never updates, always the same reference

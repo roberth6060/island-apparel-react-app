@@ -20,6 +20,7 @@ const Navbar = () => {
    * useSelector - hook to access redux store
    */
   const currentUser = useSelector(selectCurrentUser);
+  console.log(currentUser);
   //Conditionally render cart drop based on  isCartOpen
   const { isCartOpen } = useContext(CartContext);
 
