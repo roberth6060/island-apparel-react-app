@@ -3,9 +3,8 @@ import { useSelector } from "react-redux";
 import DirectoryPreview from "../common/Directory/DirectoryPreview";
 import { selectCategoriesMap } from "../../store/categories/categorySelector";
 import { useDispatch } from "react-redux";
-
 import { getCategoriesAndDocuments } from "../../utils/firebase";
-import { setCategoriesMap } from "../../store/categories/categoryAction";
+import { setCategories } from "../../store/categories/categoryAction";
 
 const CategoriesPreview = () => {
   const categoriesMap = useSelector(selectCategoriesMap);
@@ -15,8 +14,9 @@ const CategoriesPreview = () => {
   useEffect(() => {
     //Proper way to use async functions woth useEffect
     const getCategoriesMap = async () => {
-      const categoryMap = await getCategoriesAndDocuments("categories");
-      dispatch(setCategoriesMap(categoryMap));
+      const categoriesArray = await getCategoriesAndDocuments("categories");
+      console.log(categoriesArray);
+      dispatch(setCategories(categoriesArray));
     };
     getCategoriesMap();
   }, [dispatch]);

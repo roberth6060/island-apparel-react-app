@@ -2,7 +2,7 @@ import CATEGORY_ACTION_TYPES from "./categoryTypes";
 /**NOTE - CATEGORY REDUCER THAT TRACKS USER CURRENT STATE  */
 
 const CATEGORIES_INITIAL_STATE = {
-  categoriesMap: {},
+  categoriesArray: [],
 };
 
 export const categoryReducer = (
@@ -11,8 +11,8 @@ export const categoryReducer = (
 ) => {
   const { type, payload } = action;
   switch (type) {
-    case CATEGORY_ACTION_TYPES.SET_CATEGORIES_MAP:
-      return { ...state, categoriesMap: payload }; //new object that will spread through the previous state and update relevant values
+    case CATEGORY_ACTION_TYPES.SET_CATEGORIES:
+      return { ...state, categoriesArray: payload }; //new object that will spread through the previous state and update relevant values
     default:
       return state;
   }

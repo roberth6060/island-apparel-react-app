@@ -7,7 +7,6 @@ import { selectCategoriesMap } from "../../store/categories/categorySelector";
 
 const Category = () => {
   const categoriesMap = useSelector(selectCategoriesMap);
-  // const { categoriesMap } = useContext(CategoriesContext);
   const { category } = useParams();
   console.log(category);
 

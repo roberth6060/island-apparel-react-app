@@ -80,13 +80,7 @@ export const getCategoriesAndDocuments = async () => {
   const q = query(collectionRef);
   const querySnapshot = await getDocs(q);
   //gives array of individual docs and the snapshots are the actual data
-  const categoryMap = querySnapshot.docs.reduce((acc, docSnapShot) => {
-    const { title, items } = docSnapShot.data();
-    acc[title.toLowerCase()] = items;
-    return acc;
-  }, {});
-
-  return categoryMap;
+  return querySnapshot.docs.map((docSnapshot) => docSnapshot.data());
 };
 
 //aysnc function that receives some users authenication object and stores it inside firestore:
