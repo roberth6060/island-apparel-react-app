@@ -6,13 +6,13 @@ import { CategoryContainer, CategoryTitle } from "./style/Category.jsx";
 import { selectCategoriesMap } from "../../store/categories/categorySelector";
 
 const Category = () => {
-  const categoriesMap = useSelector(selectCategoriesMap);
   const { category } = useParams();
-  console.log(category);
+  console.log("%cCategory useParams()", "Color: blue;", category);
+  const categoriesMap = useSelector(selectCategoriesMap);
+  console.log("%cCategory Component", "Color: red;", categoriesMap);
+  const [products, setProducts] = useState(categoriesMap[category]);
+  console.log(categoriesMap[category]);
 
-  const [products, setProducts] = useState([]);
-
-  // console.log(products);
   useEffect(() => {
     setProducts(categoriesMap[category]);
   }, [category, categoriesMap]);

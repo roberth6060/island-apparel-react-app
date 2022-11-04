@@ -1,9 +1,19 @@
 import { configureStore } from "@reduxjs/toolkit";
-import logger from "redux-logger";
+// import logger from "redux-logger";
 import { rootReducer } from "./root.reducer";
 
 /**NOTE - WHERE THE STATE LIVES AND WHERE ACTIONS ARE RECIEVED AND DISPATCH INTO REDUCERS TO UPDATE THE STATE  */
 
+const middleWareLogger = (store) => (next) => (action) => {
+  if (!action.type) {
+    return next(action);
+  }
+  console.log("type: ", action.type);
+  console.log("payload: ", action.payload);
+  console.log("currentState: ", store.getState());
+  next(action);
+  console.log("next state: ", store.getState());
+};
 /**
  * store - facilitate the movement and passing of actions through the reducers
  * @param rootReducer creates store
@@ -12,20 +22,5 @@ import { rootReducer } from "./root.reducer";
  */
 export const store = configureStore({
   reducer: rootReducer,
-  middleware: [logger],
+  middleware: [middleWareLogger],
 });
-
-/**NOTE - OLD VERSION - CAN BE DELETED. REACT 17 VERSION - ONLY FOR REFERENCE  */
-// import {
-//   compose,
-//   legacy_createStore as createStore,
-//   applyMiddleware,
-// } from "redux";
-// import logger from "redux-logger";
-// import { rootReducer } from "./root.reducer";
-
-// const middleWares = [logger];
-
-// const composedEnhancers = compose(applyMiddleware(...middleWares));
-
-// export const store = createStore(rootReducer, undefined, composedEnhancers);

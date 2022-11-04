@@ -14,7 +14,6 @@ import {
   Checkout,
   CategoriesPreview,
   Category,
-  Shop,
 } from "./routes";
 
 import GlobalStyle from "./GlobalStyle";
@@ -31,12 +30,18 @@ const routes = [
       },
       {
         path: "shop/*",
-        element: <CategoriesPreview />,
+        children: [
+          {
+            index: true,
+            element: <CategoriesPreview />,
+          },
+          {
+            path: ":category",
+            element: <Category />,
+          },
+        ],
       },
-      {
-        path: "/shop/:category",
-        element: <Category />,
-      },
+
       {
         path: "contact",
         element: <Contact />,
