@@ -1,11 +1,4 @@
-import { useRoutes } from "react-router-dom";
-import { Suspense, useEffect } from "react";
-import { useDispatch } from "react-redux";
-
-import {
-  onAuthStateChangedListener,
-  createUSerDocumentFromAuth,
-} from "./utils/firebase";
+import { Suspense } from "react";
 import {
   Navbar,
   Home,
@@ -17,7 +10,9 @@ import {
 } from "./routes";
 
 import GlobalStyle from "./GlobalStyle";
-import { setCurrentUser } from "./store/user/userAction";
+import { useApp } from "./useApp";
+import Loading from "./components/Loading/Loading";
+// import PuffLoader from "react-spinners/PuffLoader";
 
 const routes = [
   {
@@ -59,27 +54,19 @@ const routes = [
 ];
 
 const App = () => {
-  /**
-   * NOTE - only one instance of dispatch from react-redux. Never updates, always the same reference
-   */
-  const dispatch = useDispatch();
-  useEffect(() => {
-    /**
-     * unsubscribe Function - add the ability to track if user is signin or signout - Open listener (always active)
-     *@param user callback function that will execute when auth state changes
-     */
-    const unsubscribe = onAuthStateChangedListener((user) => {
-      if (user) {
-        createUSerDocumentFromAuth(user);
-      }
-      dispatch(setCurrentUser(user));
-    });
-    return unsubscribe;
-  }, [dispatch]); //dependency NOT MANDATORY since state never changes
+  /**TODO - loading animation with react spinners */
+  // const [loading, setLoading] = useState(false);
+  // useEffect(() => {
+  //   setLoading(true);
+  //   setTimeout(() => {
+  //     setLoading(false);
+  //   }, 2000);
+  // }, []);
 
-  const element = useRoutes(routes);
+  const { element } = useApp(routes);
+
   return (
-    <Suspense fallback={<div>Nothing ready</div>}>
+    <Suspense fallback={<Loading />}>
       <GlobalStyle />
       {element}
     </Suspense>
