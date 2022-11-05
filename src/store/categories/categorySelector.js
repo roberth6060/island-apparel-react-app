@@ -2,17 +2,23 @@ import { createSelector } from "reselect";
 /**
  * Using memoization (cache data)
  */
+
 const selectCategoryReducer = (state) => state.categories;
+
 export const selectCategories = createSelector(
   [selectCategoryReducer],
-  (categoriesReducer) => categoriesReducer.categories
+  (categoriesSlice) => categoriesSlice.categoriesArray
 );
-
-export const selectCategoriesMap = (state) => {
-  console.log("Selector fired");
-  return state.categories.categoriesArray.reduce((acc, category) => {
-    const { title, items } = category;
-    acc[title.toLowerCase()] = items;
-    return acc;
-  }, {});
-};
+/**
+ * Memoizated selector - prevents method from being rerun if categoriesArray does not change (returns previously calculated value)
+ */
+export const selectCategoriesMap = createSelector(
+  [selectCategories],
+  (categories) => {
+    return categories.reduce((acc, category) => {
+      const { title, items } = category;
+      acc[title.toLowerCase()] = items;
+      return acc;
+    }, {});
+  }
+);

@@ -1,8 +1,7 @@
 //Fragment: A component that gets rendered to nothing when it gets mounted on the DOM:
-import { Fragment, useContext } from "react";
+import { Fragment } from "react";
 import { Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { CartContext } from "../../context/CartContext";
 import { signOutUser } from "../../utils/firebase";
 import CartIcon from "../common/Cart/CartIcon";
 import CartDropDown from "../common/Cart/DropDown";
@@ -14,15 +13,15 @@ import {
 } from "./style/Navbar";
 import Logo from "../../assets/logo.png";
 import { selectCurrentUser } from "../../store/user/userSelector";
+import { selectIsCartOpen } from "../../store/cart/cartSelector";
 
 const Navbar = () => {
   /**
    * useSelector - hook to access redux store
    */
   const currentUser = useSelector(selectCurrentUser);
-  console.log(currentUser);
   //Conditionally render cart drop based on  isCartOpen
-  const { isCartOpen } = useContext(CartContext);
+  const isCartOpen = useSelector(selectIsCartOpen);
 
   return (
     <Fragment>

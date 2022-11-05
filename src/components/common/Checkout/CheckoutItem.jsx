@@ -1,7 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
-import { useContext } from "react";
-import { CartContext } from "../../../context/CartContext";
 
 import {
   CheckoutItemContainer,
@@ -12,17 +10,21 @@ import {
   Value,
   RemoveButton,
 } from "./style/CheckoutItem";
+import { useDispatch } from "react-redux";
+import {
+  clearItemFromCart,
+  removeItemToCart,
+  addItemToCart,
+} from "../../../store/cart/cartAction";
 
 const CheckoutItem = ({ cartItem }) => {
+  const dispatch = useDispatch;
   const { name, imageUrl, price, quantity } = cartItem;
 
-  const { clearItemFromCart, addItemToCart, removeItemToCart } =
-    useContext(CartContext);
-
   //Handler functions
-  const clearItemHandler = () => clearItemFromCart(cartItem);
-  const leftArrowHandler = () => removeItemToCart(cartItem);
-  const rightArrowHandler = () => addItemToCart(cartItem);
+  const clearItemHandler = () => dispatch(clearItemFromCart(cartItem));
+  const leftArrowHandler = () => dispatch(removeItemToCart(cartItem));
+  const rightArrowHandler = () => dispatch(addItemToCart(cartItem));
 
   return (
     <CheckoutItemContainer>
