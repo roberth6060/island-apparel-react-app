@@ -10,7 +10,7 @@ const middleWareLogger = (store) => (next) => (action) => {
   }
 
   next(action);
-  console.log("%caction", "Color: red;", store.getState());
+  // console.log("%caction", "Color: red;", store.getState());
 };
 
 /**

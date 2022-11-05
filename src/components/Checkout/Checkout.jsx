@@ -3,7 +3,7 @@ import {
   selectCartItems,
   selectCartTotal,
 } from "../../store/cart/cartSelector";
-import CheckoutItem from "../common/Checkout/CheckoutItem";
+import CheckoutItem from "../common/CheckoutItem/CheckoutItem";
 import "./style/Checkout.jsx";
 import {
   CheckOutContainer,

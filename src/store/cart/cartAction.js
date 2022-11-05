@@ -30,7 +30,7 @@ const addCartItem = (cartItems, productToAdd) => {
  * @param {*} productToRemove potential product to be removed from cartItems
  * @returns cartItems with decrease quantity or cartItems with removed product
  */
-const removeItemFromCart = (cartItems, productToRemove) => {
+export const removeCartItem = (cartItems, productToRemove) => {
   //Find the cart item to remove
   const cartItemExist = cartItems.find(
     (cartItem) => cartItem.id === productToRemove.id
@@ -70,12 +70,8 @@ export const addItemToCart = (cartItems, productToAdd) => {
   return createAction(CART_ACTION_TYPES.SET_CART_ITEMS, newCartItems);
 };
 
-export const removeItemToCart = (cartItems, productToRemove) => {
-  const newCartItems = removeItemFromCart(
-    cartItems,
-    cartItems,
-    productToRemove
-  );
+export const removeItemFromCart = (cartItems, productToRemove) => {
+  const newCartItems = removeCartItem(cartItems, productToRemove);
   return createAction(CART_ACTION_TYPES.SET_CART_ITEMS, newCartItems);
 };
 

@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
-
+import { useDispatch, useSelector } from "react-redux";
 import {
   CheckoutItemContainer,
   ImgContainer,
@@ -10,21 +10,24 @@ import {
   Value,
   RemoveButton,
 } from "./style/CheckoutItem";
-import { useDispatch } from "react-redux";
+import { selectCartItems } from "../../../store/cart/cartSelector";
 import {
   clearItemFromCart,
-  removeItemToCart,
+  removeItemFromCart,
   addItemToCart,
 } from "../../../store/cart/cartAction";
 
 const CheckoutItem = ({ cartItem }) => {
-  const dispatch = useDispatch;
+  const dispatch = useDispatch();
+  const cartItems = useSelector(selectCartItems);
   const { name, imageUrl, price, quantity } = cartItem;
 
   //Handler functions
-  const clearItemHandler = () => dispatch(clearItemFromCart(cartItem));
-  const leftArrowHandler = () => dispatch(removeItemToCart(cartItem));
-  const rightArrowHandler = () => dispatch(addItemToCart(cartItem));
+  const clearItemHandler = () =>
+    dispatch(clearItemFromCart(cartItems, cartItem));
+  const leftArrowHandler = () =>
+    dispatch(removeItemFromCart(cartItems, cartItem));
+  const rightArrowHandler = () => dispatch(addItemToCart(cartItems, cartItem));
 
   return (
     <CheckoutItemContainer>
