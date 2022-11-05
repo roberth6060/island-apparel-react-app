@@ -11,8 +11,7 @@ import {
 
 import GlobalStyle from "./GlobalStyle";
 import { useApp } from "./useApp";
-import Loading from "./components/Loading/Loading";
-// import PuffLoader from "react-spinners/PuffLoader";
+import Loading from "./components/common/Loading/Loading";
 
 const routes = [
   {
@@ -54,15 +53,6 @@ const routes = [
 ];
 
 const App = () => {
-  /**TODO - loading animation with react spinners */
-  // const [loading, setLoading] = useState(false);
-  // useEffect(() => {
-  //   setLoading(true);
-  //   setTimeout(() => {
-  //     setLoading(false);
-  //   }, 2000);
-  // }, []);
-
   const { element } = useApp(routes);
 
   return (
