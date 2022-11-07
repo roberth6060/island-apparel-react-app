@@ -3,6 +3,8 @@ import CATEGORY_ACTION_TYPES from "./categoryTypes";
 
 const CATEGORIES_INITIAL_STATE = {
   categoriesArray: [],
+  isLoading: false,
+  error: null,
 };
 
 export const categoryReducer = (
@@ -11,8 +13,12 @@ export const categoryReducer = (
 ) => {
   const { type, payload } = action;
   switch (type) {
-    case CATEGORY_ACTION_TYPES.SET_CATEGORIES:
-      return { ...state, categoriesArray: payload }; //new object that will spread through the previous state and update relevant values
+    case CATEGORY_ACTION_TYPES.FETCH_CATEGORIES_START:
+      return { ...state, isLoading: true };
+    case CATEGORY_ACTION_TYPES.FETCH_CATEGORIES_SUCCESS:
+      return { ...state, categoriesArray: payload, isLoading: false };
+    case CATEGORY_ACTION_TYPES.FETCH_CATEGORIES_FAILED:
+      return { ...state, error: payload, isLoading: false };
     default:
       return state;
   }

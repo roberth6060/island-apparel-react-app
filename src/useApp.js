@@ -6,8 +6,7 @@ import {
   createUSerDocumentFromAuth,
 } from "./utils/firebase";
 import { setCurrentUser } from "./store/user/userAction";
-import { getCategoriesAndDocuments } from "./utils/firebase";
-import { setCategories } from "./store/categories/categoryAction";
+import { fetchCategoriesAsync } from "./store/categories/categoryAction";
 export const useApp = (routes) => {
   /**
    * NOTE - only one instance of dispatch from react-redux. Never updates, always the same reference
@@ -26,13 +25,9 @@ export const useApp = (routes) => {
       dispatch(setCurrentUser(user));
     });
 
-    //Proper way to use async functions woth useEffect
-    const getCategoriesMap = async () => {
-      const categoriesArray = await getCategoriesAndDocuments("categories");
-      dispatch(setCategories(categoriesArray));
-    };
+    //dispatch categories with Thunk
+    dispatch(fetchCategoriesAsync());
 
-    getCategoriesMap();
     //Dispatch categories to redux store
     return unsubscribe;
   }, [dispatch]); //dependency NOT MANDATORY since state never changes
