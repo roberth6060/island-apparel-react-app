@@ -11,7 +11,6 @@ import {
 
 import GlobalStyle from "./GlobalStyle";
 import { useApp } from "./useApp";
-import Loading from "./components/common/Loading/Loading";
 
 const routes = [
   {
@@ -56,7 +55,7 @@ const App = () => {
   const { element } = useApp(routes);
 
   return (
-    <Suspense fallback={<Loading />}>
+    <Suspense fallback={<h1>Loading...</h1>}>
       <GlobalStyle />
       {element}
     </Suspense>
