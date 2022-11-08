@@ -6,7 +6,7 @@ import {
   createUSerDocumentFromAuth,
 } from "./utils/firebase";
 import { setCurrentUser } from "./store/user/userAction";
-import { fetchCategoriesAsync } from "./store/categories/categoryAction";
+import { fetchCategoriesStart } from "./store/categories/categoryAction";
 export const useApp = (routes) => {
   /**
    * NOTE - only one instance of dispatch from react-redux. Never updates, always the same reference
@@ -26,7 +26,7 @@ export const useApp = (routes) => {
     });
 
     //dispatch categories with Thunk
-    dispatch(fetchCategoriesAsync());
+    dispatch(fetchCategoriesStart());
 
     //Dispatch categories to redux store
     return unsubscribe;
