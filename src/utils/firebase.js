@@ -114,7 +114,7 @@ export const createUSerDocumentFromAuth = async (
     }
   }
   //if user data exist
-  return userDocRef;
+  return userSnapshot;
 };
 
 /********************** Create interface layer (function) through helper function **********************/
@@ -133,3 +133,18 @@ export const signInAuthUserWithEmailAndPassword = async (email, password) => {
 export const signOutUser = async () => await signOut(auth);
 //Create a auth state change listener using cb
 export const onAuthStateChangedListener = (cb) => onAuthStateChanged(auth, cb);
+
+// Change from an observable listener to a promise base listerer function call
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = onAuthStateChanged(
+      auth,
+      (userAuth) => {
+        unsubscribe();
+        /** Resolve the moment auth is received  */
+        resolve(userAuth);
+      },
+      reject
+    );
+  });
+};

@@ -18,7 +18,6 @@ const Category = () => {
   useEffect(() => {
     setProducts(categoriesMap[category]);
   }, [category, categoriesMap]);
-  console.log(isLoading);
   return (
     <Fragment>
       <CategoryTitle>{category.toUpperCase()}</CategoryTitle>
