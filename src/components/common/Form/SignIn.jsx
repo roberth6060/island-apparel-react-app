@@ -3,13 +3,14 @@
  */
 
 import { useState } from "react";
-import {
-  signInWithGooglePopup,
-  signInAuthUserWithEmailAndPassword,
-} from "../../../utils/firebase";
+import { useDispatch } from "react-redux";
 import Input from "./Input";
 import Button, { BUTTON_TYPE_CLASSES } from "../Button/Button";
 import { SignInContainer, ButtonsContainer } from "./styles/SignIn";
+import {
+  googleSignInStart,
+  emailSignInStart,
+} from "../../../store/user/userAction";
 
 const defaultFormField = {
   email: "",
@@ -17,12 +18,11 @@ const defaultFormField = {
 };
 
 const SignIn = () => {
+  const dispatch = useDispatch();
+
   const [formFields, setFormFields] = useState(defaultFormField);
 
   const { email, password } = formFields;
-
-  //use useContext to store user data:
-  // const { setCurrentUser } = useContext(UserContext);
 
   //Reset the values in formFields:
   const resetFormFields = () => {
@@ -32,8 +32,7 @@ const SignIn = () => {
 
   // Sign in using Google services:
   const SignInWithGoogle = async () => {
-    await signInWithGooglePopup();
-    // setCurrentUser(user);
+    dispatch(googleSignInStart());
   };
 
   const handleSubmit = async (event) => {
@@ -41,10 +40,7 @@ const SignIn = () => {
 
     //See if user is authenicated with email and password:
     try {
-      const { user } = await signInAuthUserWithEmailAndPassword(
-        email,
-        password
-      );
+      dispatch(emailSignInStart(email, password));
       //Update the currentUser state with user's info:
       // setCurrentUser(user);
 

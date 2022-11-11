@@ -4,9 +4,14 @@ import { signInSuccess, signInFailed } from "./userAction";
 import {
   getCurrentUser,
   createUSerDocumentFromAuth,
+  signInWithGooglePopup,
+  signInAuthUserWithEmailAndPassword,
 } from "../../utils/firebase";
 
-/**NOTE - All of firebase signin, signup with google or with email and passsword will flow through this saga  */
+/**NOTE -
+ * All of firebase signin, signup with google or with email and passsword will flow through this saga
+ *Generator function* - which returns a Generator object.
+ */
 
 /**Method- will be called once the userAuth object is received  */
 export function* getSnapshotFromUserAuth(userAuth, addtionalDetails) {
@@ -17,14 +22,36 @@ export function* getSnapshotFromUserAuth(userAuth, addtionalDetails) {
       addtionalDetails
     );
 
-    console.log("%cuserSnapshot", "Color: red;", userSnapshot);
-    console.log("%cuserSnapshot.data()", "Color: pink;", userSnapshot.data());
-
     yield put(signInSuccess({ id: userSnapshot.id, ...userSnapshot.data() }));
   } catch (error) {
     yield put(signInFailed(error));
   }
 }
+/**Triggers Google popup  */
+export function* signInWithGoogle() {
+  try {
+    const { user } = yield call(signInWithGooglePopup);
+    yield call(getSnapshotFromUserAuth, user);
+  } catch (error) {
+    yield put(signInFailed(error));
+  }
+}
+
+export function* signInWithEmail({ payload: { email, password } }) {
+  try {
+    const { user } = yield call(
+      signInAuthUserWithEmailAndPassword,
+      email,
+      password
+    );
+
+    yield call(getSnapshotFromUserAuth, user);
+  } catch (error) {
+    yield put(signInFailed(error));
+  }
+}
+
+export function* userSignOut() {}
 
 export function* isUserAuthenticated() {
   try {
@@ -36,9 +63,26 @@ export function* isUserAuthenticated() {
   }
 }
 
+export function* onGoogleSignInStart() {
+  yield takeLatest(USER_ACTION_TYPES.GOOGLE_SIGN_IN_START, signInWithGoogle);
+}
+
 export function* onCheckUserSession() {
   yield takeLatest(USER_ACTION_TYPES.CHECK_USER_SESSION, isUserAuthenticated);
 }
+
+export function* onEmailSignInStart() {
+  yield takeLatest(USER_ACTION_TYPES.EMAIL_SIGN_IN_START, signInWithEmail);
+}
+
+export function* onSignOutUser() {
+  yield takeLatest(USER_ACTION_TYPES.SIGN_OUT_START, userSignOut);
+}
+
 export function* userSagas() {
-  yield all([call(onCheckUserSession)]);
+  yield all([
+    call(onCheckUserSession),
+    call(onGoogleSignInStart),
+    call(onEmailSignInStart),
+  ]);
 }

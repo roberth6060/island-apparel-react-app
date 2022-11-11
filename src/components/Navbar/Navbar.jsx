@@ -20,7 +20,6 @@ const Navbar = () => {
   const dispatch = useDispatch;
 
   const currentUser = useSelector(selectCurrentUser);
-  console.log("%ccurrentUser", "Color:red;", currentUser);
 
   //Conditionally render cart drop based on  isCartOpen
   const isCartOpen = useSelector(selectIsCartOpen);
