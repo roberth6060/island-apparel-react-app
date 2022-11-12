@@ -41,8 +41,6 @@ const SignIn = () => {
     //See if user is authenicated with email and password:
     try {
       dispatch(emailSignInStart(email, password));
-      //Update the currentUser state with user's info:
-      // setCurrentUser(user);
 
       resetFormFields();
     } catch (err) {

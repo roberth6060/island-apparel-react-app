@@ -131,6 +131,7 @@ export const signInAuthUserWithEmailAndPassword = async (email, password) => {
 
 //Sign out NOTE auth also keeps track of what users are signin
 export const signOutUser = async () => await signOut(auth);
+
 //Create a auth state change listener using cb
 export const onAuthStateChangedListener = (cb) => onAuthStateChanged(auth, cb);
 

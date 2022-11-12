@@ -17,10 +17,9 @@ import { selectIsCartOpen } from "../../store/cart/cartSelector";
 import { signOutStart } from "../../store/user/userAction";
 
 const Navbar = () => {
-  const dispatch = useDispatch;
+  const dispatch = useDispatch();
 
   const currentUser = useSelector(selectCurrentUser);
-
   //Conditionally render cart drop based on  isCartOpen
   const isCartOpen = useSelector(selectIsCartOpen);
 

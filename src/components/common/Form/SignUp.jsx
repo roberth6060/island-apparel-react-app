@@ -1,15 +1,9 @@
-/**
- * useState() Hook allows us to track state in a function component. State generally refers to data or properties that need to be tracking in an application
- */
-
-import { useState } from "react"; //useContext
-import {
-  createAuthUserWithEmailAndPassword,
-  createUSerDocumentFromAuth,
-} from "../../../utils/firebase";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import Input from "./Input";
 import Button from "../Button/Button";
 import { SignUpContainer } from "./styles/SignUp";
+import { signUpStart } from "../../../store/user/userAction";
 
 const defaultFormField = {
   displayName: "",
@@ -19,12 +13,10 @@ const defaultFormField = {
 };
 
 const SignUp = () => {
+  const dispatch = useDispatch();
   const [formFields, setFormFields] = useState(defaultFormField);
 
   const { displayName, email, password, confirmPassword } = formFields;
-
-  //Set user after sign up:
-  // const { setCurrentUser } = useContext(UserContext);
 
   //Reset the values in formFields:
   const resetFormFields = () => {
@@ -41,17 +33,9 @@ const SignUp = () => {
       return;
     }
 
-    //See if user is authenicated with email and password:
+    //See if user is authenticated with email and password:
     try {
-      const { user } = await createAuthUserWithEmailAndPassword(
-        email,
-        password
-      );
-
-      // setCurrentUser(user);
-
-      await createUSerDocumentFromAuth(user, { displayName });
-
+      dispatch(signUpStart(email, password, displayName));
       resetFormFields();
     } catch (err) {
       //returns error message if email is in use, else turns error type
