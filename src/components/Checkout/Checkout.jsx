@@ -10,6 +10,7 @@ import {
   CheckOutHeader,
   HeaderBlock,
 } from "./style/Checkout";
+import Payment from "../common/Form/Payment";
 
 const Checkout = () => {
   const cartItems = useSelector(selectCartItems);
@@ -37,6 +38,7 @@ const Checkout = () => {
         <CheckoutItem key={cartItem.id} cartItem={cartItem} />
       ))}
       <span className="total">Total: ${cartTotal}</span>
+      <Payment />
     </CheckOutContainer>
   );
 };
