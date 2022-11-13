@@ -1,13 +1,9 @@
-/**NOTE - Serverless function to handle backend */
-
 require("dotenv").config();
-const secretKey = `${process.env.REACT_APP_STRIPE_SECRET_KEY}`;
 
-const stripe = require("stripe")(secretKey);
+const stripe = require("stripe")(`${process.env.REACT_APP_STRIPE_SECRET_KEY}`);
 
 exports.handler = async (event) => {
   try {
-    //Make payment intent
     const { amount } = JSON.parse(event.body);
 
     const paymentIntent = await stripe.paymentIntents.create({
@@ -21,8 +17,11 @@ exports.handler = async (event) => {
       body: JSON.stringify({ paymentIntent }),
     };
   } catch (error) {
-    console.log(error);
+    console.log({ error });
 
-    return { status: 400, body: JSON.stringify({ error }) };
+    return {
+      statusCode: 400,
+      body: JSON.stringify({ error }),
+    };
   }
 };
