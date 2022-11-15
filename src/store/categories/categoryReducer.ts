@@ -1,4 +1,5 @@
-import CATEGORY_ACTION_TYPES from "./categoryTypes";
+import { CATEGORY_ACTION_TYPES } from "./categoryTypes";
+import { CategoryAction } from "./categoryAction";
 /**NOTE - CATEGORY REDUCER THAT TRACKS USER CURRENT STATE  */
 
 const CATEGORIES_INITIAL_STATE = {
@@ -9,7 +10,7 @@ const CATEGORIES_INITIAL_STATE = {
 
 export const categoryReducer = (
   state = CATEGORIES_INITIAL_STATE,
-  action = {}
+  action = {} as CategoryAction // discriminated unions (3 types)
 ) => {
   const { type, payload } = action;
   switch (type) {
