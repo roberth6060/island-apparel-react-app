@@ -13,7 +13,7 @@ export type Action<T> = {
   type: T;
 };
 
-/**Function overloading - must have same number of params */
+/**Function overloading - must have different number of params */
 export function createAction<T extends string, P>(
   type: T,
   payload: P

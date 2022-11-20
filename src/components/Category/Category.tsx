@@ -8,12 +8,14 @@ import {
   selectCategoriesIsLoading,
 } from "../../store/categories/categorySelector";
 import Spinnner from "../common/Spinner/Spinner";
+import { Category } from "../../store";
 
 const Category = () => {
   const { category } = useParams();
   const categoriesMap = useSelector(selectCategoriesMap);
   const isLoading = useSelector(selectCategoriesIsLoading);
-  const [products, setProducts] = useState(categoriesMap[category]);
+  const [products, setProducts] = useState<Category[] | undefined >(categoriesMap[category]);
+
 
   useEffect(() => {
     setProducts(categoriesMap[category]);
