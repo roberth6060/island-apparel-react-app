@@ -1,9 +1,10 @@
 import { CATEGORY_ACTION_TYPES, Category } from "./categoryTypes";
-import { createAction, Action, ActionWithPayload } from "../../utils/reducer";
-
-// export const setCategories = (categoriesArray) => {
-//   return createAction(CATEGORY_ACTION_TYPES.SET_CATEGORIES, categoriesArray);
-// };
+import {
+  createAction,
+  Action,
+  ActionWithPayload,
+  withMatcher,
+} from "../../utils/reducer";
 
 /**
  * tells application/redux store that categories are starting to be fetched
@@ -17,7 +18,7 @@ export type FetchCategoriesSuccess = ActionWithPayload<
   Category[]
 >;
 
-export type fetchCategoriesFailed = ActionWithPayload<
+export type FetchCategoriesFailed = ActionWithPayload<
   CATEGORY_ACTION_TYPES.FETCH_CATEGORIES_FAILED,
   Error
 >;
@@ -26,15 +27,23 @@ export type fetchCategoriesFailed = ActionWithPayload<
 export type CategoryAction =
   | FetchCategoriesStart
   | FetchCategoriesSuccess
-  | fetchCategoriesFailed;
+  | FetchCategoriesFailed;
 
-export const fetchCategoriesStart = (): FetchCategoriesStart =>
-  createAction(CATEGORY_ACTION_TYPES.FETCH_CATEGORIES_START);
-
-export const fetchCategoriesSuccess = (
-  categoriesArray: Category[]
-): FetchCategoriesSuccess =>
-  createAction(CATEGORY_ACTION_TYPES.FETCH_CATEGORIES_SUCCESS, categoriesArray);
-
-export const fetchCategoriesFailed = (error: Error): fetchCategoriesFailed =>
-  createAction(CATEGORY_ACTION_TYPES.FETCH_CATEGORIES_FAILED, error);
+/**
+ * Matchable action creators
+ */
+export const fetchCategoriesStart = withMatcher(
+  (): FetchCategoriesStart =>
+    createAction(CATEGORY_ACTION_TYPES.FETCH_CATEGORIES_START)
+);
+export const fetchCategoriesSuccess = withMatcher(
+  (categoriesArray: Category[]): FetchCategoriesSuccess =>
+    createAction(
+      CATEGORY_ACTION_TYPES.FETCH_CATEGORIES_SUCCESS,
+      categoriesArray
+    )
+);
+export const fetchCategoriesFailed = withMatcher(
+  (error: Error): FetchCategoriesFailed =>
+    createAction(CATEGORY_ACTION_TYPES.FETCH_CATEGORIES_FAILED, error)
+);
