@@ -1,6 +1,11 @@
 import { CategoryItem } from "../categories";
 import { CART_ACTION_TYPES, CartItem } from "./cartTypes";
-import { createAction, withMatcher } from "../../utils/reducer";
+import {
+  createAction,
+  withMatcher,
+  Action,
+  ActionWithPayload,
+} from "../../utils/reducer";
 
 /**
  * addCartItem Function - used to add products to cart
@@ -8,7 +13,10 @@ import { createAction, withMatcher } from "../../utils/reducer";
  * @param {*} productToAdd potential product to be added to cartItems
  * @returns object with cartItems with new product and quantity or existing cartItems if productToAdd exists
  */
-const addCartItem = (cartItems: CartItem, productToAdd: CategoryItem) => {
+const addCartItem = (
+  cartItems: CartItem[],
+  productToAdd: CategoryItem
+): CartItem[] => {
   //Find if cartItems contains productToAdd (EXISTING PRODUCT):
   const cartItemExist = cartItems.find(
     (cartItem) => cartItem.id === productToAdd.id
@@ -31,13 +39,16 @@ const addCartItem = (cartItems: CartItem, productToAdd: CategoryItem) => {
  * @param {*} productToRemove potential product to be removed from cartItems
  * @returns cartItems with decrease quantity or cartItems with removed product
  */
-export const removeCartItem = (cartItems, productToRemove) => {
+export const removeCartItem = (
+  cartItems: CartItem[],
+  productToRemove: CartItem
+): CartItem[] => {
   //Find the cart item to remove
   const cartItemExist = cartItems.find(
     (cartItem) => cartItem.id === productToRemove.id
   );
   //Check if quantity is equal to 1, if so remove item from the cart:
-  if (cartItemExist.quantity === 1) {
+  if (cartItemExist && cartItemExist.quantity === 1) {
     return cartItems.filter((cartItem) => cartItem.id !== productToRemove.id);
   }
   //Return cartItems with matching cart item with reduced quantity
@@ -54,29 +65,58 @@ export const removeCartItem = (cartItems, productToRemove) => {
  * @param {*} cartItemToClear product that needs to be removed
  * @return cartItems without a product from cartItemToClear
  */
-const clearCartItem = (cartItems, cartItemToClear) => {
+const clearCartItem = (
+  cartItems: CartItem[],
+  cartItemToClear: CartItem
+): CartItem[] => {
   //Remove cartItemToClear from cartitems (no matter the quantity)
   return cartItems.filter((cartItem) => cartItem.id !== cartItemToClear.id);
 };
 
-export const setIsCartOpen = (boolean) => {
-  return createAction(CART_ACTION_TYPES.SET_IS_CART_OPEN, boolean);
-};
+/**NOTE - Define each of the action as a type  */
+export type SetIsCartOpen = ActionWithPayload<
+  CART_ACTION_TYPES.SET_IS_CART_OPEN,
+  boolean
+>;
+
+export type SetCartItems = ActionWithPayload<
+  CART_ACTION_TYPES.SET_CART_ITEMS,
+  CartItem[]
+>;
+
+export const setIsCartOpen = withMatcher(
+  (boolean: boolean): SetIsCartOpen =>
+    createAction(CART_ACTION_TYPES.SET_IS_CART_OPEN, boolean)
+);
+
+export const setCartItems = withMatcher(
+  (cartItems: CartItem[]): SetCartItems =>
+    createAction(CART_ACTION_TYPES.SET_CART_ITEMS, cartItems)
+);
 
 /**
  *  action Functions - to add, remove, clear item from cart or toggle cart
  */
-export const addItemToCart = (cartItems, productToAdd) => {
+export const addItemToCart = (
+  cartItems: CartItem[],
+  productToAdd: CategoryItem
+) => {
   const newCartItems = addCartItem(cartItems, productToAdd);
-  return createAction(CART_ACTION_TYPES.SET_CART_ITEMS, newCartItems);
+  return setCartItems(newCartItems);
 };
 
-export const removeItemFromCart = (cartItems, productToRemove) => {
+export const removeItemFromCart = (
+  cartItems: CartItem[],
+  productToRemove: CartItem
+) => {
   const newCartItems = removeCartItem(cartItems, productToRemove);
-  return createAction(CART_ACTION_TYPES.SET_CART_ITEMS, newCartItems);
+  return setCartItems(newCartItems);
 };
 
-export const clearItemFromCart = (cartItems, productToRemove) => {
+export const clearItemFromCart = (
+  cartItems: CartItem[],
+  productToRemove: CartItem
+) => {
   const newCartItems = clearCartItem(cartItems, productToRemove);
-  return createAction(CART_ACTION_TYPES.SET_CART_ITEMS, newCartItems);
+  return setCartItems(newCartItems);
 };
