@@ -20,7 +20,7 @@ const CATEGORIES_INITIAL_STATE: CategoriesState = {
 
 export const categoryReducer = (
   state = CATEGORIES_INITIAL_STATE,
-  action = {} as AnyAction // discriminated unions (3 types)
+  action: AnyAction
 ): CategoriesState => {
   if (fetchCategoriesStart.match(action)) {
     return { ...state, isLoading: true };

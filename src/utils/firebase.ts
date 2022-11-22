@@ -15,6 +15,8 @@ import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
+  User,
+  NextOrObserver,
 } from "firebase/auth";
 
 //firebase store imports:
@@ -27,7 +29,9 @@ import {
   writeBatch,
   query,
   getDocs,
+  QueryDocumentSnapshot,
 } from "firebase/firestore";
+import { Category } from "../store/categories/categoryTypes";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -60,7 +64,13 @@ export const signInWithGoogleRedirect = () =>
 export const db = getFirestore();
 
 /******** Create new database collection in firestore with productsData  ********/
-export const addCollectionAndDocument = async (collectionKey, objectsToAdd) => {
+export type ObjectToAdd = {
+  title: string;
+};
+export const addCollectionAndDocument = async <T extends ObjectToAdd>(
+  collectionKey: string,
+  objectsToAdd: T[]
+): Promise<void> => {
   const collectionRef = collection(db, collectionKey);
   //Creates batch to add objects to collection (instantiate batch class):
   const batch = writeBatch(db);
@@ -75,19 +85,32 @@ export const addCollectionAndDocument = async (collectionKey, objectsToAdd) => {
 };
 
 //Gain access to collection firebase database
-export const getCategoriesAndDocuments = async () => {
+
+export const getCategoriesAndDocuments = async (): Promise<Category[]> => {
   const collectionRef = collection(db, "categories");
   const q = query(collectionRef);
   const querySnapshot = await getDocs(q);
   //gives array of individual docs and the snapshots are the actual data
-  return querySnapshot.docs.map((docSnapshot) => docSnapshot.data());
+  return querySnapshot.docs.map(
+    (docSnapshot) => docSnapshot.data() as Category
+  );
 };
 
 //aysnc function that receives some users authenication object and stores it inside firestore:
+export type AddtionalInformation = {
+  displayName?: string;
+};
+//info comes from the getDoc, where userSnapshot is returned
+export type UserData = {
+  displayName: string;
+  email: string;
+  createdAt: Date;
+};
+
 export const createUSerDocumentFromAuth = async (
-  userAuth,
-  additionalInformation = {}
-) => {
+  userAuth: User,
+  additionalInformation = {} as AddtionalInformation
+): Promise<void | QueryDocumentSnapshot<UserData>> => {
   if (!userAuth) return;
   //See if there is an existing document reference (instance of a document model):
   const userDocRef = doc(db, "users", userAuth.uid); //Even if it does not exist, Google will still generate this object.
@@ -109,22 +132,28 @@ export const createUSerDocumentFromAuth = async (
         createAt,
         ...additionalInformation,
       });
-    } catch (err) {
-      console.log("Error creating the user", err.message);
+    } catch (error) {
+      console.log("Error creating the user", error);
     }
   }
   //if user data exist
-  return userSnapshot;
+  return userSnapshot as QueryDocumentSnapshot<UserData>;
 };
 
 /********************** Create interface layer (function) through helper function **********************/
 //Sign up
-export const createAuthUserWithEmailAndPassword = async (email, password) => {
+export const createAuthUserWithEmailAndPassword = async (
+  email: string,
+  password: string
+) => {
   if (!email || !password) return;
   return await createUserWithEmailAndPassword(auth, email, password);
 };
 //Sign in
-export const signInAuthUserWithEmailAndPassword = async (email, password) => {
+export const signInAuthUserWithEmailAndPassword = async (
+  email: string,
+  password: string
+) => {
   if (!email || !password) return;
   return await signInWithEmailAndPassword(auth, email, password);
 };
@@ -133,10 +162,11 @@ export const signInAuthUserWithEmailAndPassword = async (email, password) => {
 export const signOutUser = async () => await signOut(auth);
 
 //Create a auth state change listener using cb
-export const onAuthStateChangedListener = (cb) => onAuthStateChanged(auth, cb);
+export const onAuthStateChangedListener = (cb: NextOrObserver<User>) =>
+  onAuthStateChanged(auth, cb);
 
 // Change from an observable listener to a promise base listerer function call
-export const getCurrentUser = () => {
+export const getCurrentUser = (): Promise<User | null> => {
   return new Promise((resolve, reject) => {
     const unsubscribe = onAuthStateChanged(
       auth,
