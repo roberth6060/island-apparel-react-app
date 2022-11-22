@@ -1,4 +1,4 @@
-import { configureStore } from "@reduxjs/toolkit";
+// import { configureStore } from "@reduxjs/toolkit";
 // import logger from "redux-logger";
 import {
   compose,
@@ -16,9 +16,12 @@ import { rootSaga } from "./rootSaga";
 
 /**NOTE - WHERE THE STATE LIVES AND WHERE ACTIONS ARE RECIEVED AND DISPATCH INTO REDUCERS TO UPDATE THE STATE  */
 
+export type RootState = ReturnType<typeof rootReducer>;
+
 /**
  * Config object - tells what is wanted
  */
+
 const persistConfig = {
   key: "root",
   storage,
