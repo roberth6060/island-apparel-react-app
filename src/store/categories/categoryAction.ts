@@ -23,12 +23,6 @@ export type FetchCategoriesFailed = ActionWithPayload<
   Error
 >;
 
-//Create a union of types:
-export type CategoryAction =
-  | FetchCategoriesStart
-  | FetchCategoriesSuccess
-  | FetchCategoriesFailed;
-
 /**
  * Matchable action creators
  */
