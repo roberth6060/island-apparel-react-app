@@ -6,6 +6,7 @@ import {
   ActionWithPayload,
 } from "../../utils/reducer";
 import { UserData, AddtionalInformation } from "../../utils/firebase";
+// import { User } from "firebase/auth";
 
 /**
  * Action Types
@@ -48,6 +49,10 @@ export type SignUpFailed = ActionWithPayload<
   USER_ACTION_TYPES.SIGN_UP_FAILED,
   Error
 >;
+
+export type SignOutStart = Action<USER_ACTION_TYPES.SIGN_OUT_START>;
+
+export type SignOutSuccess = Action<USER_ACTION_TYPES.SIGN_OUT_SUCCESS>;
 
 export type SignOutFailed = ActionWithPayload<
   USER_ACTION_TYPES.SIGN_OUT_FAILED,
@@ -106,11 +111,13 @@ export const signUpFailed = withMatcher(
     createAction(USER_ACTION_TYPES.SIGN_UP_FAILED, error)
 );
 
-export const signOutStart = () =>
-  createAction(USER_ACTION_TYPES.SIGN_OUT_START);
+export const signOutStart = withMatcher(
+  (): SignOutStart => createAction(USER_ACTION_TYPES.SIGN_OUT_START)
+);
 
-export const signOutSuccess = () =>
-  createAction(USER_ACTION_TYPES.SIGN_OUT_SUCCESS);
+export const signOutSuccess = withMatcher(
+  (): SignOutSuccess => createAction(USER_ACTION_TYPES.SIGN_OUT_SUCCESS)
+);
 
 export const signOutFailed = withMatcher(
   (error: Error): SignOutFailed =>

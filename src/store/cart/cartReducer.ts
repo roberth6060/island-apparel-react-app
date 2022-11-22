@@ -8,8 +8,8 @@ import { CartItem } from "./cartTypes";
  * INITIAL_STATE Object - gives object that needs to be tracked and what the reducer should return
  */
 export type CartState = {
-  isCartOpen: boolean;
-  cartItems: CartItem[];
+  readonly isCartOpen: boolean;
+  readonly cartItems: CartItem[];
 };
 const CART_INITIAL_STATE: CartState = {
   isCartOpen: false,
