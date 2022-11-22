@@ -1,5 +1,6 @@
-import CART_ACTION_TYPES from "./cartTypes";
-import { createAction } from "../../utils/reducer";
+import { CategoryItem } from "../categories";
+import { CART_ACTION_TYPES, CartItem } from "./cartTypes";
+import { createAction, withMatcher } from "../../utils/reducer";
 
 /**
  * addCartItem Function - used to add products to cart
@@ -7,7 +8,7 @@ import { createAction } from "../../utils/reducer";
  * @param {*} productToAdd potential product to be added to cartItems
  * @returns object with cartItems with new product and quantity or existing cartItems if productToAdd exists
  */
-const addCartItem = (cartItems, productToAdd) => {
+const addCartItem = (cartItems: CartItem, productToAdd: CategoryItem) => {
   //Find if cartItems contains productToAdd (EXISTING PRODUCT):
   const cartItemExist = cartItems.find(
     (cartItem) => cartItem.id === productToAdd.id
