@@ -1,28 +1,31 @@
-// import { configureStore } from "@reduxjs/toolkit";
-// import logger from "redux-logger";
 import {
   compose,
   applyMiddleware,
   legacy_createStore as createStore,
+  Middleware,
 } from "redux";
-// import { applyMiddleware, compose } from "@reduxjs/toolkit";
-import { rootReducer } from "./rootReducer";
-import { persistStore, persistReducer } from "redux-persist";
+import { persistStore, persistReducer, PersistConfig } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import { rootReducer } from "./rootReducer";
 import logger from "./middleware/logger";
-// import thunk from "redux-thunk"; // NOTE - Replace by saga(only one asynchronous side effect library)
 import createSagaMiddleware from "redux-saga";
 import { rootSaga } from "./rootSaga";
 
 /**NOTE - WHERE THE STATE LIVES AND WHERE ACTIONS ARE RECIEVED AND DISPATCH INTO REDUCERS TO UPDATE THE STATE  */
 
+declare global {
+  interface Window {
+    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+  }
+}
+
 export type RootState = ReturnType<typeof rootReducer>;
 
-/**
- * Config object - tells what is wanted
- */
+type ExtendedPersistConfig = PersistConfig<RootState> & {
+  whitelist: (keyof RootState)[];
+};
 
-const persistConfig = {
+const persistConfig: ExtendedPersistConfig = {
   key: "root",
   storage,
   whitelist: ["cart"],
@@ -35,7 +38,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 const middleWares = [
   process.env.NODE_ENV === "development" && logger,
   sagaMiddleware,
-].filter(Boolean);
+].filter((middleWare): middleWare is Middleware => Boolean(middleWare));
 
 /**
  * For Redux dev tool extension in Google chrome
