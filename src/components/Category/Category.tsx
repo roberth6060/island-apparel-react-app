@@ -2,19 +2,22 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect, Fragment } from "react";
 import { useSelector } from "react-redux";
 import ProductCard from "../common/Product/ProductCard";
-import { CategoryContainer, CategoryTitle } from "./style/Category.jsx";
+import { CategoryContainer, CategoryTitle } from "./style/Category";
 import {
   selectCategoriesMap,
   selectCategoriesIsLoading,
 } from "../../store/categories/categorySelector";
 import Spinnner from "../common/Spinner/Spinner";
-import { Category } from "../../store";
 
-const CategoryItems = () => {
-  const { category } = useParams();
+
+type CategoryRouteParams = {
+  category: string;
+}
+const Category = () => {
+  const { category } = useParams <keyof CategoryRouteParams>() as CategoryRouteParams;
   const categoriesMap = useSelector(selectCategoriesMap);
   const isLoading = useSelector(selectCategoriesIsLoading);
-  const [products, setProducts] = useState<Category[] | undefined >(categoriesMap[category]);
+  const [products, setProducts] = useState(categoriesMap[category]);
 
 
   useEffect(() => {
@@ -37,4 +40,4 @@ const CategoryItems = () => {
   );
 };
 
-export default CategoryItems;
+export default Category;
