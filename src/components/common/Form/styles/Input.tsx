@@ -9,7 +9,10 @@ const shrinkLabelStyles = css`
   color: ${mainColor};
 `;
 
-export const FormInputLabel = styled.label`
+type FormInputLabelProps = {
+  shrink?: boolean;
+}
+export const FormInputLabel = styled.label <FormInputLabelProps>`
   color: ${subColor};
   font-size: 16px;
   font-weight: normal;
@@ -48,3 +51,4 @@ export const Group = styled.div`
     letter-spacing: 0.3em;
   }
 `;
+

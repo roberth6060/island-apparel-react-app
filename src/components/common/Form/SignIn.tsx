@@ -1,8 +1,4 @@
-/**
- * useState() Hook allows us to track state in a function component. State generally refers to data or properties that need to be tracking in an application
- */
-
-import { useState } from "react";
+import { useState, FormEvent, ChangeEvent } from "react";
 import { useDispatch } from "react-redux";
 import Input from "./Input";
 import Button, { BUTTON_TYPE_CLASSES } from "../Button/Button";
@@ -35,7 +31,7 @@ const SignIn = () => {
     dispatch(googleSignInStart());
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: FormEvent <HTMLFormElement>) => {
     event.preventDefault();
 
     //See if user is authenicated with email and password:
@@ -60,7 +56,7 @@ const SignIn = () => {
     }
   };
 
-  const handleChange = (event) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
 
     setFormFields({ ...formFields, [name]: value });
