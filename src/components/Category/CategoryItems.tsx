@@ -10,7 +10,7 @@ import {
 import Spinnner from "../common/Spinner/Spinner";
 import { Category } from "../../store";
 
-const Category = () => {
+const CategoryItems = () => {
   const { category } = useParams();
   const categoriesMap = useSelector(selectCategoriesMap);
   const isLoading = useSelector(selectCategoriesIsLoading);
@@ -37,4 +37,4 @@ const Category = () => {
   );
 };
 
-export default Category;
+export default CategoryItems;

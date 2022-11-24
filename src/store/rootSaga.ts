@@ -1,4 +1,4 @@
-import { all, call } from "redux-saga/effects";
+import { all, call } from "typed-redux-saga/macro";
 import { categoriesSaga } from "./categories/categorySaga";
 import { userSagas } from "./user/userSaga";
 /**
@@ -8,5 +8,5 @@ import { userSagas } from "./user/userSaga";
  * Export generator function (ES6)*
  */
 export function* rootSaga() {
-  yield all([call(categoriesSaga), call(userSagas)]);
+  yield* all([call(categoriesSaga), call(userSagas)]);
 }
