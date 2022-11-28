@@ -1,58 +1,27 @@
 import { Suspense } from "react";
-import {
-  Navbar,
-  Home,
-  Contact,
-  Authentication,
-  Checkout,
-  CategoriesPreview,
-  Category,
-} from "./routes";
-
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { fetchCategoriesStart } from "./store/categories/categoryAction";
+import { checkUserSession } from "./store/user/userAction";
 import GlobalStyle from "./GlobalStyle";
-import { useApp } from "./useApp";
+import Router from "./routes/Router"
 
-const routes = [
-  {
-    path: "/",
-    element: <Navbar />,
-    children: [
-      {
-        index: true,
-        element: <Home />,
-      },
-      {
-        path: "shop/*",
-        children: [
-          {
-            index: true,
-            element: <CategoriesPreview />,
-          },
-          {
-            path: ":category",
-            element: <Category />,
-          },
-        ],
-      },
 
-      {
-        path: "contact",
-        element: <Contact />,
-      },
-      {
-        path: "auth",
-        element: <Authentication />,
-      },
-      {
-        path: "checkout",
-        element: <Checkout />,
-      },
-    ],
-  },
-];
 
 const App = () => {
-  const { element } = useApp(routes);
+    /**
+   * NOTE - only one instance of dispatch from react-redux. Never updates, always the same reference
+   */
+  const dispatch = useDispatch();
+  const element = Router();
+  useEffect(() => {
+    //dispatch user
+    dispatch(checkUserSession());
+
+    //dispatch categories
+    dispatch(fetchCategoriesStart());
+  }, [dispatch]); //dependency NOT MANDATORY since state never changes
+  // const { element } = useApp(routes);
 
   return (
     <Suspense fallback={<h1>Loading...</h1>}>
