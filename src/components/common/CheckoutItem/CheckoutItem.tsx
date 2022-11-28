@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
+import React from "react";
 import {
   CheckoutItemContainer,
   ImgContainer,
@@ -16,8 +17,13 @@ import {
   removeItemFromCart,
   addItemToCart,
 } from "../../../store/cart/cartAction";
+import { CartItem } from "../../../store/cart/cartTypes";
 
-const CheckoutItem = ({ cartItem }) => {
+type CheckoutItemProps ={
+  cartItem: CartItem;
+}
+
+const CheckoutItem: React.FC <CheckoutItemProps> = ({ cartItem }) => {
   const dispatch = useDispatch();
   const cartItems = useSelector(selectCartItems);
   const { name, imageUrl, price, quantity } = cartItem;
