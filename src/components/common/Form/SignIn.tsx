@@ -8,17 +8,19 @@ import {
   emailSignInStart,
 } from "../../../store/user/userAction";
 
+
 const defaultFormField = {
+
   email: "",
   password: "",
+ 
+
 };
 
 const SignIn = () => {
-  const dispatch = useDispatch();
-
   const [formFields, setFormFields] = useState(defaultFormField);
-
   const { email, password } = formFields;
+  const dispatch = useDispatch();
 
   //Reset the values in formFields:
   const resetFormFields = () => {
@@ -37,10 +39,9 @@ const SignIn = () => {
     //See if user is authenicated with email and password:
     try {
       dispatch(emailSignInStart(email, password));
-
       resetFormFields();
     } catch (error) {
-      console.log("user sign in failed ", error)
+      console.log("user sign in failed", error)
     }
   };
 
