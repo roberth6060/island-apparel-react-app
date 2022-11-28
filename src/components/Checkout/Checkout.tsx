@@ -4,7 +4,7 @@ import {
   selectCartTotal,
 } from "../../store/cart/cartSelector";
 import CheckoutItem from "../common/CheckoutItem/CheckoutItem";
-import "./style/Checkout.jsx";
+import "./style/Checkout";
 import {
   CheckOutContainer,
   CheckOutHeader,
