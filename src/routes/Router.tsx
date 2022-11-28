@@ -4,7 +4,7 @@ import { useRoutes } from "react-router-dom";
 import {
   Navbar,
   Home,
-  Contact,
+
   Authentication,
   Checkout,
   CategoriesPreview,
@@ -34,11 +34,6 @@ const routes = [
           },
         ],
       },
-
-      {
-        path: "contact",
-        element: <Contact />,
-      },
       {
         path: "auth",
         element: <Authentication />,
@@ -50,9 +45,6 @@ const routes = [
     ],
   },
 ];
-
-
-
 
   const element = useRoutes(routes);
 

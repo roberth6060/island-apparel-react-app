@@ -1,3 +1,4 @@
+import React from "react";
 import ProductCard from "../Product/ProductCard";
 
 import {
@@ -5,8 +6,13 @@ import {
   Title,
   Preview,
 } from "./styles/DirectoryPreview";
+import{CategoryItem} from "../../../store/categories/categoryTypes"
 
-const DirectoryPreview = ({ title, products }) => {
+type DirectoryPreviewProps ={
+  title: string;
+  products: CategoryItem[];
+}
+const DirectoryPreview: React.FC <DirectoryPreviewProps> = ({ title, products }) => {
   return (
     <CategoryPreviewContainer>
       <h2>

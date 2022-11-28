@@ -8,12 +8,12 @@ import Router from "./routes/Router"
 
 
 
-const App = () => {
+const App: React.FC = () => {
     /**
    * NOTE - only one instance of dispatch from react-redux. Never updates, always the same reference
    */
   const dispatch = useDispatch();
-  const element = Router();
+  const {element} = Router();
   useEffect(() => {
     //dispatch user
     dispatch(checkUserSession());
@@ -21,7 +21,7 @@ const App = () => {
     //dispatch categories
     dispatch(fetchCategoriesStart());
   }, [dispatch]); //dependency NOT MANDATORY since state never changes
-  // const { element } = useApp(routes);
+
 
   return (
     <Suspense fallback={<h1>Loading...</h1>}>
