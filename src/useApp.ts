@@ -1,10 +1,10 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useRoutes } from "react-router-dom";
 import { fetchCategoriesStart } from "./store/categories/categoryAction";
 import { checkUserSession } from "./store/user/userAction";
 
-export const useApp = (routes) => {
+export const useApp: React.FC<> = (routes) => {
   /**
    * NOTE - only one instance of dispatch from react-redux. Never updates, always the same reference
    */
