@@ -1,3 +1,4 @@
+//NOTE - netlify dev to start cli server to test stripe payment with serverless function
 require("dotenv").config();
 
 const stripe = require("stripe")(`${process.env.REACT_APP_STRIPE_SECRET_KEY}`);
