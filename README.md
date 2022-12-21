@@ -3,7 +3,7 @@
 Island Apparel is a Jamaican-inspired online retail store selling custom hats, shirts, and jackets.  
 
 ## Note
-Currently futher optimizing app, testing, and creating mobile view. 
+Currently futher optimizing app, testing, and update the website UI for desktop, laptop, tablet, and mobile view. 
 
 ## Built With
 

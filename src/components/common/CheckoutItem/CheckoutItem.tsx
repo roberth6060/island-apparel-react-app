@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
-import React from "react";
+import React, {memo} from "react";
 import {
   CheckoutItemContainer,
   ImgContainer,
@@ -23,9 +23,9 @@ type CheckoutItemProps ={
   cartItem: CartItem;
 }
 
-const CheckoutItem: React.FC <CheckoutItemProps> = ({ cartItem }) => {
-  const dispatch = useDispatch();
+const CheckoutItem: React.FC <CheckoutItemProps> = memo(({ cartItem }) => {
   const cartItems = useSelector(selectCartItems);
+  const dispatch = useDispatch();
   const { name, imageUrl, price, quantity } = cartItem;
 
   //Handler functions
@@ -52,6 +52,6 @@ const CheckoutItem: React.FC <CheckoutItemProps> = ({ cartItem }) => {
       </RemoveButton>
     </CheckoutItemContainer>
   );
-};
+});
 
 export default CheckoutItem;
