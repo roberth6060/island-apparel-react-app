@@ -1,21 +1,19 @@
 
 import { useRoutes } from "react-router-dom";
-
+import { lazy } from "react";
 import {
   Navbar,
-  Home,
-
-  Authentication,
   Checkout,
   CategoriesPreview,
   Category,
 } from ".";
+const Home = lazy (()=> import ("../components/Home/Home"));
+const Authentication = lazy (()=> import ("../components/Authentication/Authentication"));
 
- const Router = () => {
 const routes = [
   {
     path: "/",
-    element: <Navbar />,
+    element: <Navbar/>,
     children: [
       {
         index: true,
@@ -46,11 +44,9 @@ const routes = [
   },
 ];
 
-  const element = useRoutes(routes);
-
- 
-
-  return { element };
+const Routes = () => {
+  const elements = useRoutes(routes);
+  return elements;
 };
 
-export default Router;
+export default Routes;

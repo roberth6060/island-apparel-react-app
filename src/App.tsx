@@ -4,16 +4,17 @@ import { useDispatch } from "react-redux";
 import { fetchCategoriesStart } from "./store/categories/categoryAction";
 import { checkUserSession } from "./store/user/userAction";
 import GlobalStyle from "./GlobalStyle";
-import Router from "./routes/Router"
+import Routes from "./routes/Routes";
+import Spinner from "./components/common/Spinner/Spinner";
 
 
 
 const App: React.FC = () => {
-    /**
+   /**
    * NOTE - only one instance of dispatch from react-redux. Never updates, always the same reference
    */
   const dispatch = useDispatch();
-  const {element} = Router();
+  // const {element} = Router();
   useEffect(() => {
     //dispatch user
     dispatch(checkUserSession());
@@ -22,11 +23,10 @@ const App: React.FC = () => {
     dispatch(fetchCategoriesStart());
   }, [dispatch]); //dependency NOT MANDATORY since state never changes
 
-
   return (
-    <Suspense fallback={<h1>Loading...</h1>}>
+    <Suspense fallback={<Spinner/>}>
       <GlobalStyle />
-      {element}
+      <Routes/>
     </Suspense>
   );
 };
