@@ -1,14 +1,19 @@
 
 import { useRoutes } from "react-router-dom";
 import { lazy } from "react";
-import {
-  Navbar,
-  Checkout,
-  CategoriesPreview,
-  Category,
-} from ".";
+// import {
+//   Navbar,
+//   Checkout,
+//   CategoriesPreview,
+//   Category,
+// } from ".";
+
 const Home = lazy (()=> import ("../components/Home/Home"));
 const Authentication = lazy (()=> import ("../components/Authentication/Authentication"));
+const Navbar = lazy (()=> import ("../components/Navbar/Navbar"));
+const CategoriesPreview = lazy (()=> import ("../components/CategoriesPreview/CategoriesPreview"));
+const Category = lazy (()=> import ("../components/Category/Category"));
+const Checkout = lazy (()=> import ("../components/Checkout/Checkout"));
 
 const routes = [
   {
