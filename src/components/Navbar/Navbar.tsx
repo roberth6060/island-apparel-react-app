@@ -2,7 +2,6 @@
 import { Fragment } from "react";
 import { Outlet } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-// import { signOutUser } from "../../utils/firebase";
 import CartIcon from "../common/Cart/CartIcon";
 import CartDropDown from "../common/Cart/DropDown";
 import {
@@ -51,7 +50,6 @@ const Navbar = () => {
           <CartIcon />
         </NavLinks>
         {
-          //Short-circuit operator (components are truthy values bs it is a function)
           isCartOpen && <CartDropDown />
         }
       </NavbarContainer>

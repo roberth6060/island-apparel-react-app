@@ -10,6 +10,12 @@ export const NavbarContainer = styled.div`
   height: 5vh;
   margin: 20px 0;
 
+  @media screen and (max-width: 800px){
+    height: 60px;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+  }
+
   a {
     text-decoration: none;
     color: black;
@@ -24,7 +30,7 @@ export const NavbarContainer = styled.div`
     user-select: none;
     cursor: pointer;
   }
-  @media (max-width: 804px) {
+  @media screen and (max-width: 804px) {
     .hamburger {
       display: block;
     }
@@ -50,6 +56,7 @@ export const NavLinks = styled.div`
   z-index: 1;
   align-items: center;
 
+
   a {
     padding: 5px;
     min-width: 3.5em;
@@ -67,7 +74,7 @@ export const NavLinks = styled.div`
 
   @media (max-width: 804px) {
     top: 60px;
-    display: none;
+
     position: absolute;
     right: 0;
     left: 0;
@@ -77,6 +84,7 @@ export const NavLinks = styled.div`
 
     a {
       text-align: left;
+      
     }
 
     li {
