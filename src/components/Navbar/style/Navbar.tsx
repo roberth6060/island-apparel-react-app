@@ -46,8 +46,48 @@ export const MenuButtonContainer = styled.label.attrs({for: 'menu-toggle'})`
 }
 `
 
+export const Menu = styled.div`
+  display: flex;
+  flex-direction: row;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  li {
+    margin: 0 3px;
+    overflow: hidden;
+    padding: 5px 10px;
+    a {
+      width: 100%;
+    }
+    &:hover:not(.active) {
+      background-color: #4e6c50;
+      transition: 0.2s;
+      transform: skew(-5deg);
+      a {
+        color: #fff;
+      }
+    }
+  }
+a {
+    padding: 10px 20px;
+}
+
+@media screen and (max-width:800px) {
+  background-color: #fff6bf;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  flex-direction: column;
+  width: 260px;
+  justify-content: center;
+  margin-top: 85px;
+  z-index: 5;
+}
+
+`;
+
 export const MenuToggle = styled.input.attrs({ id: 'menu-toggle',type: 'checkbox' })`
-  /* display: none; */
+  display: none;
   &:checked + ${MenuButtonContainer} ${MenuButton}::before {
     margin-top: 0px;
     transform: rotate(405deg);
@@ -63,17 +103,12 @@ export const MenuToggle = styled.input.attrs({ id: 'menu-toggle',type: 'checkbox
   }
 
   @media screen and (max-width:800px) {
-    & ~ a {
-    height: 0;
-    margin: 0;
-    padding: 0;
-    border: 0;
+    & ~ ${Menu} {
+    display: none;
     transition: height 400ms cubic-bezier(0.23, 1, 0.32, 1);
   }
-  &:checked ~ a {
-    border: 1px solid #333;
-    height: 2.5em;
-    padding: 0.5em;
+  &:checked ~ ${Menu} {
+    display: block;
     transition: height 400ms cubic-bezier(0.23, 1, 0.32, 1);
   }
 }
@@ -94,47 +129,4 @@ export const NavLink = styled(Link)`
   align-items: center;
 `;
 
-export const Menu = styled.div`
-  display: flex;
-  flex-direction: row;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
 
-  li {
-    margin: 0 3px;
-    overflow: hidden;
-    padding: 5px 10px;
-
-    a {
-      width: 100%;
-    }
-
-    &:hover:not(.active) {
-      background-color: #4e6c50;
-
-      transition: 0.2s;
-      transform: skew(-5deg);
-      a {
-        color: #fff;
-      }
-    }
-  }
-
-a {
-    padding: 10px 20px;
-}
-
-@media screen and (max-width:800px) {
-  background-color: #fff6bf;
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  flex-direction: column;
-  width: 300px;
-  justify-content: center;
-  margin-top: 85px;
-  z-index: 5;
-}
-
-`;

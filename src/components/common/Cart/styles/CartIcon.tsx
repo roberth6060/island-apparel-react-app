@@ -16,8 +16,16 @@ export const ItemCount = styled.span`
   font-weight: bold;
   bottom: 10px;
   color: #fff;
+  @media screen and (max-width:800px) {
+ margin-left: 20px;
+  }
 `;
 export const ShoppingIcon = styled(ShoppingImg)`
   width: 35px;
   height: 35px;
+  @media screen and (max-width:800px) {
+  position: absolute;
+
+ left: 15px;
+  }
 `;

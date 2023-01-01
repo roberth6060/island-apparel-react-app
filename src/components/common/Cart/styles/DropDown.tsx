@@ -23,6 +23,7 @@ export const CartDropDownContainer = styled.div`
   @media screen and (max-width:800px) {
     top: 160px;
     right: 0;
+      width: 260px;
   }
 `;
 
@@ -34,6 +35,7 @@ export const CartItems = styled.div`
 `;
 
 export const EmptyMessage = styled.span`
+background-color: red;
   font-size: 18px;
   margin: 50px auto;
 `;
