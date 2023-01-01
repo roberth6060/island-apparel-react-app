@@ -40,21 +40,29 @@ export const MenuButtonContainer = styled.label.attrs({for: 'menu-toggle'})`
 
 @media screen and (max-width:800px) {
   display: flex;
+  width: 40px;
+  height: 40px;
+
 }
 `
 
 export const MenuToggle = styled.input.attrs({ id: 'menu-toggle',type: 'checkbox' })`
-  &:checked + MenuButtonContainer MenuButton::before {
+  /* display: none; */
+  &:checked + ${MenuButtonContainer} ${MenuButton}::before {
     margin-top: 0px;
     transform: rotate(405deg);
   }
-  &:checked + MenuButtonContainer MenuButton::after {
+  &:checked + ${MenuButtonContainer} ${MenuButton} {
+  background: rgba(255, 255, 255, 0);
+
+ 
+  }
+  &:checked + ${MenuButtonContainer} ${MenuButton}::after {
   margin-top: 0px;
   transform: rotate(-405deg);
-}
+  }
 
   @media screen and (max-width:800px) {
-   
     & ~ a {
     height: 0;
     margin: 0;
@@ -68,8 +76,7 @@ export const MenuToggle = styled.input.attrs({ id: 'menu-toggle',type: 'checkbox
     padding: 0.5em;
     transition: height 400ms cubic-bezier(0.23, 1, 0.32, 1);
   }
-  }
-
+}
 `
 export const NavbarContainer = styled.div`
   align-items: center;
@@ -79,20 +86,6 @@ export const NavbarContainer = styled.div`
   background-color: #fff6bf;
   height: 5vh;
   margin: 20px 0;
-
-#menu-toggle {
-  display: none;
-}
-
-
-
-#menu-toggle:checked + .menu-button-container .menu-button {
-  background: rgba(255, 255, 255, 0);
-}
-
-
-
-  
 `;
 
 export const NavLink = styled(Link)`
@@ -100,8 +93,6 @@ export const NavLink = styled(Link)`
   display: flex;
   align-items: center;
 `;
-
-
 
 export const Menu = styled.div`
   display: flex;
@@ -132,16 +123,18 @@ export const Menu = styled.div`
 
 a {
     padding: 10px 20px;
-  }
+}
 
-  @media screen and (max-width:800px) {
-    position: absolute;
-    top: 0;
-    margin-top: 85px;
-    left: 0;
-    flex-direction: column;
-    width: 100%;
-    justify-content: center;
+@media screen and (max-width:800px) {
+  background-color: #fff6bf;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  flex-direction: column;
+  width: 300px;
+  justify-content: center;
+  margin-top: 85px;
+  z-index: 5;
 }
 
 `;
