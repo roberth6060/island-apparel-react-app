@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
+
 export const NavbarContainer = styled.div`
   align-items: center;
   display: flex;
@@ -10,32 +11,65 @@ export const NavbarContainer = styled.div`
   height: 5vh;
   margin: 20px 0;
 
-  @media screen and (max-width: 800px){
-    height: 60px;
-    padding: 10px 20px;
-    margin-bottom: 20px;
-  }
+  .menu-button-container {
+  display: none;
+  height: 100%;
+  width: 30px;
+  cursor: pointer;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
-  a {
-    text-decoration: none;
-    color: black;
-  }
+#menu-toggle {
+  display: none;
+}
 
-  input[type="checkbox"] {
-    display: none;
-  }
-  .hamburger {
-    display: none;
-    font-size: 24px;
-    user-select: none;
-    cursor: pointer;
-  }
-  @media screen and (max-width: 804px) {
-    .hamburger {
-      display: block;
+.menu-button,
+.menu-button::before,
+.menu-button::after {
+  display: block;
+  background-color: #4e6c50;
+  position: absolute;
+  height: 4px;
+  width: 30px;
+  transition: transform 400ms cubic-bezier(0.23, 1, 0.32, 1);
+  border-radius: 2px;
+}
+
+.menu-button::before {
+  content: "";
+  margin-top: -8px;
+}
+
+.menu-button::after {
+  content: "";
+  margin-top: 8px;
+}
+
+#menu-toggle:checked + .menu-button-container .menu-button::before {
+  margin-top: 0px;
+  transform: rotate(405deg);
+}
+
+#menu-toggle:checked + .menu-button-container .menu-button {
+  background: rgba(255, 255, 255, 0);
+}
+
+#menu-toggle:checked + .menu-button-container .menu-button::after {
+  margin-top: 0px;
+  transform: rotate(-405deg);
+}
+
+  @media screen and (max-width:800px) {
+      .menu-button-container {
+      display: flex;
     }
   }
+
+  
 `;
+
 
 export const NavLink = styled(Link)`
   list-style: none;
@@ -44,63 +78,95 @@ export const NavLink = styled(Link)`
 `;
 
 export const LogoContainer = styled(Link)`
-  img {
-    width: 250px;
-  }
+    display: flex;
+    gap: 5px;
+    align-items: center;
+
+    img {
+      width: 50px;
+    }
+    span {
+      font-size: 17px;
+      font-family: "Raleway";
+      color: #0a2c46;
+    }
 `;
 
-export const NavLinks = styled.div`
+export const Menu = styled.div`
   display: flex;
-  font-size: 18px;
-  gap: 1em;
-  z-index: 1;
-  align-items: center;
+  flex-direction: row;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 
-
-  a {
-    padding: 5px;
-    min-width: 3.5em;
-    height: 35px;
-    font-size: 1em;
-    text-align: center;
-    justify-content: center;
-
-    &:hover {
-      background-color: rgba(255, 0, 0, 0.8);
-
-      transition: 0.5s ease;
-    }
-  }
-
-  @media (max-width: 804px) {
-    top: 60px;
-
-    position: absolute;
-    right: 0;
-    left: 0;
-    text-align: center;
-    padding: 16px 0;
-    margin: 29px;
+  li {
+    margin: 0 3px;
+    overflow: hidden;
+    padding: 5px 10px;
 
     a {
-      text-align: left;
-      
+      width: 100%;
     }
 
-    li {
-      a:hover {
-        display: inline-block;
-        transition: 0.3s ease;
+    &:hover:not(.active) {
+      background-color: #4e6c50;
+
+      transition: 0.2s;
+      transform: skew(-5deg);
+      a {
+        color: #fff;
       }
     }
+  }
 
-    li + li {
-      margin-top: 12px;
-      width: auto;
-    }
+a {
+    padding: 10px 20px;
+  }
 
-    .hamburger {
-      display: block;
+  @media screen and (max-width:800px) {
+    position: absolute;
+    top: 0;
+    margin-top: 85px;
+    left: 0;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+
+    #menu-toggle ~ li {
+    height: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    transition: height 400ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  #menu-toggle:checked ~ li {
+    border: 1px solid #333;
+    height: 2.5em;
+    padding: 0.5em;
+    transition: height 400ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .menu > li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0.5em 0;
+    width: 100%;
+    color: red;
+    background-color: $bg;
+  }
+  .menu > li:not(:last-child) {
+    border-bottom: 1px solid #444;
+  }
+
+  .menu {
+    li {
+      &:hover:not(.active) {
+        transform: skew(0deg);
+      }
     }
   }
+}
+
 `;

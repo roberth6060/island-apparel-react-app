@@ -7,8 +7,8 @@ import CartDropDown from "../common/Cart/DropDown";
 import {
   NavbarContainer,
   LogoContainer,
-  NavLinks,
   NavLink,
+  Menu,
 } from "./style/Navbar";
 import Logo from "../../assets/logo.png";
 import { selectCurrentUser } from "../../store/user/userSelector";
@@ -30,11 +30,11 @@ const Navbar = () => {
         <LogoContainer to="/">
           <img src={Logo} alt="logo" />
         </LogoContainer>
-        <NavLinks>
-          <input type="checkbox" id="checkbox_toggle" />
-          <label htmlFor="checkbox_toggle" className="hamburger">
-            &#9776;
-          </label>
+        <input id="menu-toggle" type="checkbox" />
+        <label className="menu-button-container" htmlFor="menu-toggle">
+          <span className="menu-button"></span>
+        </label>
+        <Menu>
           <NavLink to="/">Home</NavLink>
           <NavLink to="/shop">Shop</NavLink>
           {/* <NavLink to="/contact">Contact</NavLink> */}
@@ -47,11 +47,11 @@ const Navbar = () => {
               <NavLink as="span"> Sign In</NavLink>
             )}
           </NavLink>
-          <CartIcon />
-        </NavLinks>
+          <CartIcon /> 
         {
           isCartOpen && <CartDropDown />
         }
+         </Menu>
       </NavbarContainer>
       <Outlet />
     </Fragment>
