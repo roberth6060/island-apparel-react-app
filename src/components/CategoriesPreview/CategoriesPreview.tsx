@@ -11,7 +11,6 @@ const CategoriesPreview = () => {
   const categoriesMap = useSelector(selectCategoriesMap);
   const isLoading = useSelector(selectCategoriesIsLoading);
 
-  // const dispatch = useDispatch();
   return (
     <Fragment>
       {isLoading ? (
