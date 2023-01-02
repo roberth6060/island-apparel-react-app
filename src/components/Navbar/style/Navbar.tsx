@@ -75,7 +75,7 @@ a {
 @media screen and (max-width:800px) {
   background-color: #fff6bf;
   position: absolute;
-  top: 10px;
+  top: 15px;
   right: 10px;
   flex-direction: column;
   width: 260px;
