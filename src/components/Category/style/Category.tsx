@@ -10,7 +10,16 @@ export const CategoryContainer = styled.div`
   grid-template-columns: repeat(3, 1fr);
   }
   @media screen and (max-width:800px) {
+    column-gap: 5px;
+    justify-content: space-evenly;
+    justify-items: center;
+    align-content: space-evenly;
+    align-items: center; 
+
     grid-template-columns: repeat(2, 1fr);
+  }
+    @media screen and (max-width:600px) {
+    grid-template-columns: repeat(1, 1fr);
   }
 `;
 
