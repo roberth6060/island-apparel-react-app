@@ -15,7 +15,6 @@ export const CategoryContainer = styled.div`
     justify-items: center;
     align-content: space-evenly;
     align-items: center; 
-
     grid-template-columns: repeat(2, 1fr);
   }
     @media screen and (max-width:600px) {

@@ -5,13 +5,23 @@ export const PaymentContainer = styled.div`
   height: 200px;
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
   justify-content: center;
+  width: 80%;
+  padding-bottom: 60px;
+  @media screen and (max-width:1020px) {
+  width: 85%;
+  }
+  @media screen and (max-width:800px) {
+  width: 90%;
+  }
+  @media screen and (max-width:600px) {
+  width: 95%;
+  }
 `;
 
 export const FormContainer = styled.form`
   height: 100px;
-  min-width: 500px;
+  min-width: 100%;
 `;
 
 export const PaymentButton = styled(Button)`
